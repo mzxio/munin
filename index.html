@@ -10,43 +10,55 @@
 
 <body>
 
-  <div id="cardComp">
-    <!-- split up compose and edit views
-    <textarea id="text" maxlength="450" placeholder="write something"></textarea>
-    <div class="flexmenu">
-      <span id="textLength">0</span>
-      <button id="send" onclick="addCard()" disabled>send it</button>
-    </div>-->
-    <!-- chains 
-    <button>add another</button>
-    -->
-  </div>
-  
-  <div id="cardEditor">
+  <div id="cardEdit">
+    <!-- todo activate editor
+    <button>x</button>
 
-    <textarea id="text" maxlength="450" placeholder="write something"></textarea>
+    <textarea id="editText" maxlength="450" placeholder="write something"></textarea>
+
     <div class="flexmenu">
-      <!-- mvp <button>X</button>-->
-      <span id="textLength">0</span>
-      <button id="send" onclick="addCard()" disabled>send it</button>
+      <span id="editTextLength">0</span>
+      <button id="editSend" onclick="addCard()" disabled>resend it</button>
     </div>
 
-    <!-- mvp 
-    <input type="text" placeholder="title"></input>
-    <input type="text" placeholder="pip"></input>
-    <input type="text" placeholder="related"></input>
+    <div class="flexmenu">
+      <input id="editTitle" type="text" placeholder="title" maxlength="80"></input>
+      <span>&nbsp;</span>
+      <input id="editPip" type="text" placeholder="pip" maxlength="3"></input>
+    </div>
+
+    <input id="editRelated" type="text" placeholder="#related"></input>
+    -->
+    
+    <!-- todo chains update
+    <div class="flexmenu">
+      <input id="editPrev" type="text" placeholder="prev"></input>
+      <input id="editNext" type="text" placeholder="next"></input>
+    </div>
     -->
 
-    <!-- chains 
-    <input type="text" placeholder="prev"></input>
-    <input type="text" placeholder="next"></input>
-    -->
-    <!-- images
+    <!-- todo images update
     <input type="text" placeholder="front image"></input>
     <input type="text" placeholder="back image"></input>
     -->
 
   </div>
+
+<!--  <hr />-->
+
+  <div id="cardComp">
+
+    <textarea id="newText" maxlength="450" placeholder="write something"></textarea>
+    <div class="flexmenu">
+      <span id="newTextLength">0</span>
+      <button id="newSend" onclick="addCard()" disabled>send it</button>
+    </div>
+
+    <!-- chains 
+    <button>add another</button>
+    -->
+  </div>
+
 
   <div id="cardDeck">
     <!-- field where cards will be rendered -->
@@ -62,4 +74,5 @@
 
 
 </body>
+
 </html>

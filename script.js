@@ -42,17 +42,17 @@ if (window.localStorage.getItem("deck")) {
 
 
 // when textarea changes update text length character counter
-document.getElementById("text").addEventListener("input", (event) => {
+document.getElementById("newText").addEventListener("input", (event) => {
   //console.log(event)
   // set the counter element to new text length
-  let len = document.getElementById("text").value.length;
-  let counter = document.getElementById("textLength");
+  let len = document.getElementById("newText").value.length;
+  let counter = document.getElementById("newTextLength");
   counter.innerHTML = len;
   // disable button if text length is zero
   if (len > 0) {
-    document.getElementById("send").disabled = false;
+    document.getElementById("newSend").disabled = false;
   } else {
-    document.getElementById("send").disabled = true;
+    document.getElementById("newSend").disabled = true;
   }
 })
 
@@ -61,7 +61,8 @@ document.getElementById("text").addEventListener("input", (event) => {
 
 
 function addCard() {
-  let text = document.getElementById("text");
+
+  let text = document.getElementById("newText");
 
   // check to make sure text is >0 and <=450
   if (text.value.length > 0 && text.value.length <= 450) {
@@ -77,8 +78,8 @@ function addCard() {
     deck.id += 1;
     // reset textarea, character counter, and button
     text.value = "";
-    document.getElementById("textLength").innerHTML = 0;
-    document.getElementById("send").disabled = true;
+    document.getElementById("newTextLength").innerHTML = 0;
+    document.getElementById("newSend").disabled = true;
     // save altered deck
     saveDeck();
     // update cards display
@@ -94,8 +95,8 @@ function editCard(id) {
       //console.log("edit "+id)
       console.log(deck.cards[i].id)
       console.log(deck.cards[i].text)
-      //document.getElementById("text").value = deck.cards[i].text;
-      //document.getElementById("textLength").innerHTML = deck.cards[i].text.length;
+      //document.getElementById("newText").value = deck.cards[i].text;
+      //document.getElementById("newTextLength").innerHTML = deck.cards[i].text.length;
       break
     } else {
       continue
