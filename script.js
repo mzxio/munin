@@ -81,7 +81,7 @@ document.getElementById("editText").addEventListener("input", (event) => {
 //  CARD FUNCTIONS
 
 
-// fired by "send it" button click
+// fired by "send it" button click in the composer
 function addCard() {
 
   let text = document.getElementById("newText");
@@ -113,7 +113,7 @@ function addCard() {
   }
 }
 
-// fired by "re-send it" button click
+// fired by "re-send it" button click in the editor
 function addCardEdits() {
   //console.log(deck.cards[deck.active])
 
@@ -133,8 +133,9 @@ function addCardEdits() {
     document.getElementById("editTextLength").innerHTML = 0;
     document.getElementById("editSend").disabled = true;
 
-    document.getElementById("cardEdit").style.display = "none";
+    document.getElementById("cardEditModal").style.display = "none";
     document.getElementById("cardComp").style.display = "block";
+    document.getElementById("cardDeck").style.display = "block";
     // save altered deck
     saveDeck();
     // update cards display
@@ -161,8 +162,9 @@ function editCard(id) {
       document.getElementById("editTextLength").innerHTML = deck.cards[i].text.length;
       //document.getElementById("editSend").disabled = false;
 
-      document.getElementById("cardEdit").style.display = "block";
+      document.getElementById("cardEditModal").style.display = "block";
       document.getElementById("cardComp").style.display = "none";
+      document.getElementById("cardDeck").style.display = "none";
 
       break
     } else {
@@ -207,8 +209,9 @@ function editCancel() {
   document.getElementById("editTextLength").innerHTML = 0;
   document.getElementById("editSend").disabled = true;
   // switch back to composer view
-  document.getElementById("cardEdit").style.display = "none";
+  document.getElementById("cardEditModal").style.display = "none";
   document.getElementById("cardComp").style.display = "block";
+  document.getElementById("cardDeck").style.display = "block";
 }
 
 

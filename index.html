@@ -9,46 +9,46 @@
 </head>
 
 <body>
+  <div id="cardEditModal" style="display: none;">
+    <div id="cardEdit">
 
-  <div id="cardEdit" style="display: none;">
+      <div class="flexmenu">
+        <button id="editCancel" onclick="editCancel()">X</button>
+      </div>
+      <textarea id="editText" maxlength="450" placeholder="write something"></textarea>
 
-    <div class="flexmenu">
-      <button id="editCancel" onclick="editCancel()">X</button>
+      <div class="flexmenu">
+        <span id="editTextLength">0</span>
+        <button id="editSend" onclick="addCardEdits()" disabled>re-send it</button>
+      </div>
+
+      <!-- todo card meta update
+      <div class="flexmenu">
+        <input id="editTitle" type="text" placeholder="title" maxlength="80"></input>
+        <span>&nbsp;</span>
+        <input id="editPip" type="text" placeholder="pip" maxlength="3"></input>
+      </div>
+  
+      <input id="editRelated" type="text" placeholder="related"></input>
+      -->
+
+      <!-- todo chains update 
+      <div class="flexmenu">
+        <input id="editPrev" type="text" placeholder="prev"></input>
+        <span>&nbsp;</span>
+        <input id="editNext" type="text" placeholder="next"></input>
+      </div>
+      -->
+
+      <!-- todo images update
+      <input type="text" placeholder="front image"></input>
+      <input type="text" placeholder="font image alt"></input>
+      <input type="text" placeholder="back image"></input>
+      <input type="text" placeholder="back image alt"></input>
+      -->
+
     </div>
-    <textarea id="editText" maxlength="450" placeholder="write something"></textarea>
-
-    <div class="flexmenu">
-      <span id="editTextLength">0</span>
-      <button id="editSend" onclick="addCardEdits()" disabled>re-send it</button>
-    </div>
-
-    <!-- todo card meta update
-    <div class="flexmenu">
-      <input id="editTitle" type="text" placeholder="title" maxlength="80"></input>
-      <span>&nbsp;</span>
-      <input id="editPip" type="text" placeholder="pip" maxlength="3"></input>
-    </div>
-
-    <input id="editRelated" type="text" placeholder="related"></input>
-    -->
-
-    <!-- todo chains update 
-    <div class="flexmenu">
-      <input id="editPrev" type="text" placeholder="prev"></input>
-      <span>&nbsp;</span>
-      <input id="editNext" type="text" placeholder="next"></input>
-    </div>
-    -->
-
-    <!-- todo images update
-    <input type="text" placeholder="front image"></input>
-    <input type="text" placeholder="font image alt"></input>
-    <input type="text" placeholder="back image"></input>
-    <input type="text" placeholder="back image alt"></input>
-    -->
-
   </div>
-
 
   <div id="cardComp" style="display: block;">
 
@@ -73,7 +73,7 @@
   </div>
 
 
-  <div id="cardDeck">
+  <div id="cardDeck" style="display: block;">
     <!-- field where cards will be rendered -->
   </div>
 
