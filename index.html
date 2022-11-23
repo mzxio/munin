@@ -13,13 +13,13 @@
     <div id="cardEdit">
 
       <div class="flexmenu">
-        <button id="editCancel" onclick="editCancel()">X</button>
+        <button id="editCancel" onclick="editCancel()">x</button>
+        <button id="editSend" onclick="addCardEdits()" disabled>re-send it</button>
       </div>
       <textarea id="editText" maxlength="450" placeholder="write something"></textarea>
 
       <div class="flexmenu">
         <span id="editTextLength">0</span>
-        <button id="editSend" onclick="addCardEdits()" disabled>re-send it</button>
       </div>
 
       <!-- todo card meta update
@@ -53,14 +53,14 @@
   <div id="cardComp" style="display: block;">
 
     <div class="flexmenu">
-      <button id="newCancel" onclick="newCancel()">X</button>
+      <button id="newCancel" onclick="newCancel()" disabled>x</button>
+      <button id="newSend" onclick="addCard()" disabled>send it</button>
     </div>
 
     <textarea id="newText" maxlength="450" placeholder="write something"></textarea>
 
     <div class="flexmenu">
       <span id="newTextLength">0</span>
-      <button id="newSend" onclick="addCard()" disabled>send it</button>
     </div>
 
     <!-- meta
@@ -77,7 +77,7 @@
     <!-- field where cards will be rendered -->
   </div>
 
-  <div class="flexmenu">
+  <div class="flexmenu debug">
     <button onclick="exportDeck()">export</button>
     <!--<button onclick="clearDeck()">clear</button>-->
   </div>

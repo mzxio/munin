@@ -149,6 +149,10 @@ textarea,
 	justify-content: space-between;
 }
 
+.debug {
+  justify-content: space-around;
+  padding: 16pt 0;
+}
 
 #cardComp,
 #cardEdit,

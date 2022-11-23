@@ -55,8 +55,10 @@ document.getElementById("newText").addEventListener("input", (event) => {
   // disable button if text length is zero
   if (len > 0) {
     document.getElementById("newSend").disabled = false;
+    document.getElementById("newCancel").disabled = false;
   } else {
     document.getElementById("newSend").disabled = true;
+    document.getElementById("newCancel").disabled = true;
   }
 })
 
@@ -68,7 +70,7 @@ document.getElementById("editText").addEventListener("input", (event) => {
   let len = document.getElementById("editText").value.length;
   let counter = document.getElementById("editTextLength");
   counter.innerHTML = len;
-  
+
   // disable button if text length is zero
   if (len > 0) {
     document.getElementById("editSend").disabled = false;
@@ -198,6 +200,7 @@ function newCancel() {
   document.getElementById("newText").value = "";
   document.getElementById("newTextLength").innerHTML = 0;
   document.getElementById("newSend").disabled = true;
+  document.getElementById("newCancel").disabled = true;
 }
 
 // fired by "X" button in editor
@@ -250,7 +253,17 @@ function clearDeck() {
 
 function exportDeck() {
   let save = JSON.stringify(deck);
-  console.log(save)
+  //console.log(save)
+
+  let filename = "editor-export.json";
+  let element = document.createElement("a");
+  element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(save));
+  element.setAttribute("download", filename);
+  element.style.display = "none";
+
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
 }
 
 
