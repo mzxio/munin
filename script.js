@@ -19,6 +19,7 @@
 // not used anywhere
 const defaultDeck = {
   id: 1,
+  active: null,
   cards: []
 };
 
@@ -33,6 +34,7 @@ if (window.localStorage.getItem("deck")) {
 } else {
   deck = {
     id: 1,
+    active: null,
     cards: []
   };
 }
@@ -41,13 +43,15 @@ if (window.localStorage.getItem("deck")) {
 // EVENT LISTENERS
 
 
-// when textarea changes update text length character counter
+// when composer textarea changes update character counter/button
 document.getElementById("newText").addEventListener("input", (event) => {
   //console.log(event)
+
   // set the counter element to new text length
   let len = document.getElementById("newText").value.length;
   let counter = document.getElementById("newTextLength");
   counter.innerHTML = len;
+
   // disable button if text length is zero
   if (len > 0) {
     document.getElementById("newSend").disabled = false;
@@ -56,10 +60,28 @@ document.getElementById("newText").addEventListener("input", (event) => {
   }
 })
 
+// when editor textarea changes update character counter/button
+document.getElementById("editText").addEventListener("input", (event) => {
+  //console.log(event)
+
+  // set the counter element to new text length
+  let len = document.getElementById("editText").value.length;
+  let counter = document.getElementById("editTextLength");
+  counter.innerHTML = len;
+  
+  // disable button if text length is zero
+  if (len > 0) {
+    document.getElementById("editSend").disabled = false;
+  } else {
+    document.getElementById("editSend").disabled = true;
+  }
+})
+
 
 //  CARD FUNCTIONS
 
 
+// fired by "send it" button click
 function addCard() {
 
   let text = document.getElementById("newText");
@@ -68,18 +90,22 @@ function addCard() {
   if (text.value.length > 0 && text.value.length <= 450) {
     // debug
     //console.log(text.value)
+
     // add card to deck
     deck.cards.push({
       id: deck.id,
       text: text.value,
       date: new Date().toISOString()
     })
+
     // increment database IDs
     deck.id += 1;
+
     // reset textarea, character counter, and button
     text.value = "";
     document.getElementById("newTextLength").innerHTML = 0;
     document.getElementById("newSend").disabled = true;
+
     // save altered deck
     saveDeck();
     // update cards display
@@ -87,16 +113,57 @@ function addCard() {
   }
 }
 
+// fired by "re-send it" button click
+function addCardEdits() {
+  //console.log(deck.cards[deck.active])
 
+  let text = document.getElementById("editText");
+
+  // check to make sure text is >0 and <=450
+  if (text.value.length > 0 && text.value.length <= 450) {
+
+    // overwrite card with edits
+    deck.cards[deck.active].text = text.value;
+    deck.cards[deck.active].date = new Date().toISOString();
+
+    deck.active = null;
+
+    // reset textarea, character counter, and button
+    text.value = "";
+    document.getElementById("editTextLength").innerHTML = 0;
+    document.getElementById("editSend").disabled = true;
+
+    document.getElementById("cardEdit").style.display = "none";
+    document.getElementById("cardComp").style.display = "block";
+    // save altered deck
+    saveDeck();
+    // update cards display
+    showAllCards();
+
+  }
+}
+
+// fired by "edit" button click in card
 function editCard(id) {
   let oldCard = {};
   for (i in deck.cards) {
     if (deck.cards[i].id === id) {
+      // debug
       //console.log("edit "+id)
-      console.log(deck.cards[i].id)
-      console.log(deck.cards[i].text)
-      //document.getElementById("newText").value = deck.cards[i].text;
-      //document.getElementById("newTextLength").innerHTML = deck.cards[i].text.length;
+      //console.log(deck.cards[i].id)
+      //console.log(deck.cards[i].text)
+
+      // set active id to this card's id
+      deck.active = i;
+
+      // transfer contents of card into editor
+      document.getElementById("editText").value = deck.cards[i].text;
+      document.getElementById("editTextLength").innerHTML = deck.cards[i].text.length;
+      //document.getElementById("editSend").disabled = false;
+
+      document.getElementById("cardEdit").style.display = "block";
+      document.getElementById("cardComp").style.display = "none";
+
       break
     } else {
       continue
@@ -104,7 +171,7 @@ function editCard(id) {
   }
 }
 
-
+// fired by "remove" button click in card
 function deleteCard(id) {
   let newCards = [];
   for (i in deck.cards) {
@@ -123,8 +190,30 @@ function deleteCard(id) {
   showAllCards();
 }
 
+// fired by "X" button click in composer
+function newCancel() {
+  // reset input elements
+  document.getElementById("newText").value = "";
+  document.getElementById("newTextLength").innerHTML = 0;
+  document.getElementById("newSend").disabled = true;
+}
+
+// fired by "X" button in editor
+function editCancel() {
+  // clear active card id
+  deck.active = null;
+  // reset input elements
+  document.getElementById("editText").value = "";
+  document.getElementById("editTextLength").innerHTML = 0;
+  document.getElementById("editSend").disabled = true;
+  // switch back to composer view
+  document.getElementById("cardEdit").style.display = "none";
+  document.getElementById("cardComp").style.display = "block";
+}
+
 
 // DECK FUNCTIONS
+
 
 function saveDeck() {
   // stringify current deck
@@ -229,8 +318,8 @@ function renderCard(thisCard, field) {
   };
 
   menu.append(timestamp);
-  menu.append(edit);
   menu.append(remove);
+  menu.append(edit);
 
   // append elements to card
   card.append(text);
