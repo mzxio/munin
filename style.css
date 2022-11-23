@@ -86,8 +86,8 @@ textarea,
 
 .card button {
   font-size: 10pt;
-  background: black;
-  color: turquoise;
+  background: #111;
+  color: gray;
 }
 .card button:hover {
   color: black;
