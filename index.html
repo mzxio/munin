@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-16">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+  <div id="cardComp">
+    <!-- split up compose and edit views
+    <textarea id="text" maxlength="450" placeholder="write something"></textarea>
+    <div class="flexmenu">
+      <span id="textLength">0</span>
+      <button id="send" onclick="addCard()" disabled>send it</button>
+    </div>-->
+    <!-- chains 
+    <button>add another</button>
+    -->
+  </div>
+  
+  <div id="cardEditor">
+
+    <textarea id="text" maxlength="450" placeholder="write something"></textarea>
+    <div class="flexmenu">
+      <!-- mvp <button>X</button>-->
+      <span id="textLength">0</span>
+      <button id="send" onclick="addCard()" disabled>send it</button>
+    </div>
+
+    <!-- mvp 
+    <input type="text" placeholder="title"></input>
+    <input type="text" placeholder="pip"></input>
+    <input type="text" placeholder="related"></input>
+    -->
+
+    <!-- chains 
+    <input type="text" placeholder="prev"></input>
+    <input type="text" placeholder="next"></input>
+    -->
+    <!-- images
+    <input type="text" placeholder="front image"></input>
+    <input type="text" placeholder="back image"></input>
+    -->
+
+  </div>
+
+  <div id="cardDeck">
+    <!-- field where cards will be rendered -->
+  </div>
+
+  <div class="flexmenu">
+    <button onclick="exportDeck()">export</button>
+    <!--<button onclick="clearDeck()">clear</button>-->
+  </div>
+
+
+  <script src="script.js"></script>
+
+
+</body>
+</html>

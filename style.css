@@ -1,0 +1,143 @@
+
+
+body {
+	background-color: black;
+	color: white;
+	margin: 0;
+	font-family: sans-serif;
+	font-size: 12pt;
+	line-height: 1.1;
+}
+
+
+hr {
+  border: none;
+  background-color: #333;
+  height: 2pt;
+  margin: 12pt 0;
+}
+
+
+/*hr::before {
+  content: '***';
+  display: block;
+  text-align: center;
+}*/
+
+
+input[type=text],
+textarea,
+.card {
+	box-sizing: border-box;
+
+	width: 100%;
+	padding: 8pt;
+	margin: 4pt 0;
+	border: none;
+	outline: none;
+	overflow: auto;
+	resize: none;
+
+	border-radius: 2pt;
+
+	background-color: #333;
+	color: #fff;
+
+	font-size: 12pt;
+	line-height: 1.1;
+	font-family: sans-serif;
+
+}
+
+
+#text {
+	height: 148pt;
+}
+
+
+#cardEditor,
+#cardDeck {
+	max-width: 4in;
+	margin: 0 auto;
+  padding: 8pt;
+}
+
+
+#textLength {
+	color: turquoise;
+	font-size: 10pt;
+	font-weight: bold;
+  /*font-family: monospace;*/
+}
+
+
+.card .text {
+	line-height: 1.2;
+	overflow-wrap: break-word;
+	margin: 0 0 12pt 0;
+}
+
+.card .timestamp {
+	font-size: 10pt;
+	color: #888;
+	margin: 4pt 0;
+  /*font-family: monospace;*/
+}
+
+.card button {
+  font-size: 10pt;
+  background: black;
+  color: turquoise;
+}
+.card button:hover {
+  color: black;
+}
+
+.flexmenu {
+	display: flex;
+	justify-content: space-between;
+}
+
+button {
+	display: inline-block;
+	border: none;
+  box-sizing: border-box;
+	padding: 4pt 8pt;
+	margin: 0;
+	text-decoration: none;
+	background: turquoise;
+	color: black;
+	font-family: sans-serif;
+	font-size: 12pt;
+	cursor: pointer;
+	text-align: center;
+	transition: background 250ms ease-in-out, 
+	transform 150ms ease;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border-radius: 12pt;
+	font-weight: bold;
+}
+
+button:hover/*,
+button:focus*/ {
+	background: aquamarine;
+}
+
+/*button:focus {
+	outline: 1pt solid #fff;
+	outline-offset: -3pt;
+}*/
+
+button:active {
+	transform: scale(0.96);
+}
+
+button:disabled {
+	background-color: gray;
+	cursor: default;
+}
+
+button:disabled:active {
+	transform: none;
+}
