@@ -31,6 +31,14 @@
 }
 
 
+
+/*{
+color: darkturquoise;
+color: turquoise;
+color: aquamarine;
+}*/
+
+
 /* PRIMARY STYLES */
 
 body {
@@ -55,7 +63,7 @@ p {
 
 hr {
   border: none;
-  background-color: #333;
+  background-color: #222;
   height: 2pt;
   margin: 12pt 0;
 }
@@ -83,6 +91,7 @@ button {
   text-decoration: none;
   font-family: "OpenSans", sans-serif;
 	font-size: 12pt;
+  line-height: 12pt;
 	font-weight: bold;
 	text-align: center;
 	cursor: pointer;
@@ -93,6 +102,7 @@ button {
 button:hover/*,
 button:focus*/ {
 	background: aquamarine;
+  color: black;
 }
 
 /*button:focus {
@@ -105,7 +115,8 @@ button:active {
 }
 
 button:disabled {
-	background-color: gray;
+	background-color: black;
+  color: #888;
 	cursor: default;
 }
 
@@ -124,15 +135,16 @@ textarea,
 
 	width: 100%;
 	padding: 8pt;
-	margin: 4pt 0;
+	margin: 8pt 0;
 	border: none;
+  border-bottom: 2pt solid #222;
 	outline: none;
 	overflow: auto;
 	resize: none;
 
 	border-radius: 2pt;
 
-	background-color: #333;
+	background-color: #000;
 	color: #fff;
 
 	font-size: 12pt;
@@ -140,6 +152,40 @@ textarea,
 	font-family: "OpenSans", sans-serif;
 
 }
+
+
+
+/* CARD INNER CLASSES */
+
+.card {
+  border-bottom: 2pt solid #222;
+}
+
+.card .text {
+  white-space: pre-wrap;
+	overflow-wrap: break-word;
+	margin: 0 0 12pt 0;
+  user-select: text;
+}
+
+.card .timestamp {
+	font-size: 10pt;
+	color: #888;
+	margin: 4pt 0;
+  user-select: text;  
+}
+
+.card button {
+  font-size: 10pt;
+  background-color: black;
+  color: darkturquoise;
+}
+
+.card button:hover {
+  background-color: aquamarine;
+  color: black;
+}
+
 
 
 /* UI AREAS */
@@ -158,9 +204,11 @@ textarea,
 #cardEdit,
 #cardDeck {
 	max-width: 4in;
-	margin: 0 auto;
+	margin: 20pt auto;
   padding: 8pt;
 }
+
+
 
 #cardEditModal {
   background-color: black;
@@ -187,33 +235,6 @@ textarea,
 
 #editPip {
   width: 4em;
-}
-
-
-/* CARD INNER CLASSES */
-
-.card .text {
-  white-space: pre-wrap;
-	overflow-wrap: break-word;
-	margin: 0 0 12pt 0;
-  user-select: text;
-}
-
-.card .timestamp {
-	font-size: 10pt;
-	color: #888;
-	margin: 4pt 0;
-  user-select: text;  
-}
-
-.card button {
-  font-size: 10pt;
-  background: #111;
-  color: gray;
-}
-
-.card button:hover {
-  color: white;
 }
 
 
