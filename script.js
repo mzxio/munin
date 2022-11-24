@@ -87,16 +87,33 @@ document.getElementById("editText").addEventListener("input", (event) => {
 function addCard() {
 
   let text = document.getElementById("newText");
-
+  let title = document.getElementById("newTitle");
+  let pip = document.getElementById("newPip");
+  //let related = document.getElementById("newRelated");
+  
   // check to make sure text is >0 and <=450
   if (text.value.length > 0 && text.value.length <= 450) {
     // debug
     //console.log(text.value)
 
+    let newTitle = "";
+    let newPip = "";
+
+    if (title.value.length > 0) {
+      newTitle = title.value;
+    }
+    
+    if (pip.value.length > 0) {
+      newPip = pip.value
+    }
+    
     // add card to deck
     deck.cards.push({
       id: deck.id,
       text: text.value,
+      title: newTitle,
+      pip: newPip,
+      //related: related.value,
       date: new Date().toISOString()
     })
 
@@ -310,6 +327,26 @@ function renderCard(thisCard, field) {
   // safe old version
   //text.innerHTML = thisCard.text;
 
+
+  // create pip paragraph
+  if (thisCard.pip && thisCard.pip.length > 0) {
+    let pip = document.createElement("p");
+    pip.classList.add("pip");
+    pip.innerHTML = thisCard.pip;
+    card.append(pip);
+  }
+  
+  // create title heading
+  if (thisCard.title && thisCard.title.length > 0) {
+    let title = document.createElement("p");
+    title.classList.add("title");
+    title.innerHTML = thisCard.title;
+    card.append(title);
+  }
+
+  
+  
+  
   // create timestamp paragraph
   let timestamp = document.createElement("p");
   timestamp.classList.add("timestamp");

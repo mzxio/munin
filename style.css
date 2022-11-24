@@ -115,7 +115,7 @@ button:active {
 }
 
 button:disabled {
-	background-color: black;
+	background-color: #222;
   color: #888;
 	cursor: default;
 }
@@ -142,7 +142,7 @@ textarea,
 	overflow: auto;
 	resize: none;
 
-	border-radius: 2pt;
+	border-radius: none;
 
 	background-color: #000;
 	color: #fff;
@@ -153,12 +153,30 @@ textarea,
 
 }
 
+input[type=text] {
+  padding: 4pt;
+  margin: 4pt 0;
+}
 
 
 /* CARD INNER CLASSES */
 
 .card {
   border-bottom: 2pt solid #222;
+}
+
+
+.card .pip {
+  font-weight: bold;
+  color: #888;
+}
+
+.card .title {
+  margin: 8pt 0;
+  padding: 0;
+  font-size:16pt;
+  line-height: 20pt;
+  font-weight: bold;
 }
 
 .card .text {
@@ -195,9 +213,8 @@ textarea,
 	justify-content: space-between;
 }
 
-.debug {
-  justify-content: space-around;
-  padding: 16pt 0;
+.centered {
+  justify-content: center;
 }
 
 #cardComp,
@@ -233,8 +250,15 @@ textarea,
   /*font-family: monospace;*/
 }
 
+#newTitle, 
+#editTitle {
+  font-weight: bold;
+}
+
+#newPip,
 #editPip {
-  width: 4em;
+  width: 6em;
+  margin-left: 8pt;
 }
 
 

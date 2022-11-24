@@ -49,27 +49,33 @@
 
     </div>
   </div>
+  
 
   <div id="cardComp" style="display: block;">
 
     <div class="flexmenu">
       <button id="newCancel" onclick="newCancel()" disabled>X</button>
+      <span id="newTextLength">0</span>
+      <!--<button>add another</button>-->
       <button id="newSend" onclick="addCard()" disabled>send it</button>
     </div>
-
+    
     <textarea id="newText" maxlength="450" placeholder="write something"></textarea>
 
-    <div class="flexmenu">
-      <span id="newTextLength">0</span>
+    <div class="flexmenu centered">
     </div>
 
-    <!-- meta
-    <input id="editRelated" type="text" placeholder="related"></input>
+    <div class="flexmenu">
+      <input id="newTitle" type="text" placeholder="title" maxlength="80"></input>
+      <input id="newPip" type="text" placeholder="pip" maxlength="4"></input>
+    </div>
+
+    <!--
+    <div class="flexmenu">
+      <input id="newRelated" type="text" placeholder="related"></input>
+    </div>
     -->
 
-    <!-- chains 
-    <button>add another</button>
-    -->
   </div>
 
 
@@ -77,7 +83,7 @@
     <!-- field where cards will be rendered -->
   </div>
 
-  <div class="flexmenu debug">
+  <div class="flexmenu centered">
     <button onclick="exportDeck()">export</button>
     <!--<button onclick="clearDeck()">clear</button>-->
   </div>
