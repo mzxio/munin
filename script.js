@@ -16,14 +16,15 @@
 
 
 // the platonic ideal of a deck object
-// not used anywhere
-const defaultDeck = {
-  cards: [],
-  id: 1,
-  active: null,
-  trash: [],
-  relations: []
-};
+function defaultDeck() {
+  return {
+    cards: [],
+    id: 1,
+    active: null,
+    trash: [],
+    relations: []
+  }
+}
 
 // initialize deck
 // the actual object that gets used
@@ -34,13 +35,7 @@ var deck = {};
 if (window.localStorage.getItem("deck")) {
   loadDeck();
 } else {
-  deck = {
-    cards: [],
-    id: 1,
-    active: null,
-    trash: [],
-    relations: []
-  };
+  deck = defaultDeck();
 }
 
 
@@ -289,10 +284,7 @@ function loadDeck() {
 
 function clearDeck() {
   window.localStorage.clear()
-  deck = {
-    id: 1,
-    cards: []
-  };
+  deck = defaultDeck();
   showAllCards();
 }
 

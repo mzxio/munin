@@ -220,11 +220,11 @@ input[type=text] {
 #cardComp,
 #cardEdit,
 #cardDeck {
+  display: block;
 	max-width: 4in;
 	margin: 20pt auto;
   padding: 8pt;
 }
-
 
 
 #cardEditModal {

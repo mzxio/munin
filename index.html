@@ -15,20 +15,21 @@
     <!-- editor ui -->
     <div id="cardEdit">
 
-      <div class="flexmenu">
-        <button id="editCancel" onclick="editCancel()">X</button>
-        <span id="editTextLength">0</span>
-        <button id="editSend" onclick="addCardEdits()" disabled>re-send it</button>
-      </div>
-      <textarea id="editText" maxlength="450" placeholder="write something"></textarea>
+    <div class="flexmenu">
+      <button id="editCancel" onclick="editCancel();">X</button>
+      <span id="editTextLength">0</span>
+      <button id="editSend" onclick="addCardEdits();" disabled>re-send it</button>
+    </div>
+
+    <textarea id="editText" maxlength="450" placeholder="write something"></textarea>
 
     <div class="flexmenu">
-      <input id="editTitle" type="text" placeholder="title" maxlength="80"></input>
-      <input id="editPip" type="text" placeholder="pip" maxlength="4"></input>
+      <input id="editTitle" type="text" maxlength="80" placeholder="title"></input>
+      <input id="editPip" type="text" maxlength="4" placeholder="pip"></input>
     </div>
       
     <div class="flexmenu">
-      <input id="editRelated" type="text" placeholder="#related"></input>
+      <input id="editRelated" type="text" maxlength="450" placeholder="#related"></input>
     </div>
 
     <!-- todo chains update 
@@ -53,20 +54,20 @@
   <div id="cardComp" style="display: block;">
 
     <div class="flexmenu">
-      <button id="newCancel" onclick="newCancel()" disabled>X</button>
+      <button id="newCancel" onclick="newCancel();" disabled>X</button>
       <span id="newTextLength">0</span>
-      <button id="newSend" onclick="addCard()" disabled>send it</button>
+      <button id="newSend" onclick="addCard();" disabled>send it</button>
     </div>
 
     <textarea id="newText" maxlength="450" placeholder="write something"></textarea>
 
     <div class="flexmenu">
-      <input id="newTitle" type="text" placeholder="title" maxlength="80"></input>
-      <input id="newPip" type="text" placeholder="pip" maxlength="4"></input>
+      <input id="newTitle" type="text" maxlength="80" placeholder="title"></input>
+      <input id="newPip" type="text" maxlength="4" placeholder="pip" ></input>
     </div>
 
     <div class="flexmenu">
-      <input id="newRelated" type="text" placeholder="#related"></input>
+      <input id="newRelated" type="text" maxlength="450" placeholder="#related" ></input>
     </div>
 
   </div>
@@ -76,6 +77,8 @@
     <!-- field where cards will be rendered -->
   </div>
 
+  <hr/>
+  
   <!-- the deep magic -->
   <div class="flexmenu centered">
     <button onclick="exportDeck()">export</button>&nbsp;
