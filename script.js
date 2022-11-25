@@ -18,9 +18,11 @@
 // the platonic ideal of a deck object
 // not used anywhere
 const defaultDeck = {
+  cards: [],
   id: 1,
   active: null,
-  cards: []
+  trash: [],
+  relations: []
 };
 
 // initialize deck
@@ -33,9 +35,11 @@ if (window.localStorage.getItem("deck")) {
   loadDeck();
 } else {
   deck = {
+    cards: [],
     id: 1,
     active: null,
-    cards: []
+    trash: [],
+    relations: []
   };
 }
 
@@ -74,6 +78,7 @@ document.getElementById("editText").addEventListener("input", (event) => {
   // disable button if text length is zero
   if (len > 0) {
     document.getElementById("editSend").disabled = false;
+    // cancel button is always enabled
   } else {
     document.getElementById("editSend").disabled = true;
   }
@@ -89,8 +94,8 @@ function addCard() {
   let text = document.getElementById("newText");
   let title = document.getElementById("newTitle");
   let pip = document.getElementById("newPip");
-  //let related = document.getElementById("newRelated");
-  
+  let related = document.getElementById("newRelated");
+
   // check to make sure text is >0 and <=450
   if (text.value.length > 0 && text.value.length <= 450) {
     // debug
@@ -98,22 +103,29 @@ function addCard() {
 
     let newTitle = "";
     let newPip = "";
+    let newRelated = "";
 
     if (title.value.length > 0) {
       newTitle = title.value;
     }
-    
+
     if (pip.value.length > 0) {
       newPip = pip.value
     }
-    
+
+    if (related.value.length > 0) {
+      newRelated = related.value;
+      // todo parse these as tags
+      // work a helper into the deck.relations list 
+    }
+
     // add card to deck
     deck.cards.push({
       id: deck.id,
       text: text.value,
       title: newTitle,
       pip: newPip,
-      //related: related.value,
+      related: newRelated,
       date: new Date().toISOString()
     })
 
@@ -122,6 +134,9 @@ function addCard() {
 
     // reset textarea, character counter, and button
     text.value = "";
+    title.value = "";
+    pip.value = "";
+    related.value = "";
     document.getElementById("newTextLength").innerHTML = 0;
     document.getElementById("newSend").disabled = true;
 
@@ -137,21 +152,31 @@ function addCardEdits() {
   //console.log(deck.cards[deck.active])
 
   let text = document.getElementById("editText");
+  let title = document.getElementById("editTitle");
+  let pip = document.getElementById("editPip");
+  let related = document.getElementById("editRelated");
 
   // check to make sure text is >0 and <=450
   if (text.value.length > 0 && text.value.length <= 450) {
 
     // overwrite card with edits
     deck.cards[deck.active].text = text.value;
+    deck.cards[deck.active].title = title.value;
+    deck.cards[deck.active].pip = pip.value;
+    deck.cards[deck.active].related = related.value;
     deck.cards[deck.active].date = new Date().toISOString();
 
     deck.active = null;
 
     // reset textarea, character counter, and button
     text.value = "";
+    title.value = "";
+    pip.value = "";
+    related.value = "";
     document.getElementById("editTextLength").innerHTML = 0;
-    document.getElementById("editSend").disabled = true;
+    //document.getElementById("editSend").disabled = true;
 
+    // disable edit modal and return to normal display
     document.getElementById("cardEditModal").style.display = "none";
     document.getElementById("cardComp").style.display = "block";
     document.getElementById("cardDeck").style.display = "block";
@@ -165,7 +190,7 @@ function addCardEdits() {
 
 // fired by "edit" button click in card
 function editCard(id) {
-  let oldCard = {};
+  // ? let oldCard = {};
   for (i in deck.cards) {
     if (deck.cards[i].id === id) {
       // debug
@@ -179,8 +204,12 @@ function editCard(id) {
       // transfer contents of card into editor
       document.getElementById("editText").value = deck.cards[i].text;
       document.getElementById("editTextLength").innerHTML = deck.cards[i].text.length;
-      //document.getElementById("editSend").disabled = false;
+      document.getElementById("editTitle").value = deck.cards[i].title;
+      document.getElementById("editPip").value = deck.cards[i].pip;
+      document.getElementById("editRelated").value = deck.cards[i].related;
 
+      // disable normal display and render edit modal
+      document.getElementById("editSend").disabled = false;
       document.getElementById("cardEditModal").style.display = "block";
       document.getElementById("cardComp").style.display = "none";
       document.getElementById("cardDeck").style.display = "none";
@@ -284,8 +313,15 @@ function exportDeck() {
 }
 
 
+function importDeck() {
+
+}
+
+
 // DISPLAY FUNCTIONS
 
+
+// render field of cards, currently all cards newest to oldest
 function showAllCards() {
   let field = document.getElementById("cardDeck");
   field.innerHTML = null;
@@ -304,16 +340,37 @@ function showAllCards() {
 
 }
 
-
+// render individual card elements
 function renderCard(thisCard, field) {
   // create master card div
   let card = document.createElement("div");
   card.classList.add("card");
 
+  // create pip paragraph
+  if (thisCard.pip && thisCard.pip.length > 0) {
+    let pip = document.createElement("p");
+    pip.classList.add("pip");
+    pip.innerHTML = thisCard.pip;
+    // append to card immediately
+    card.append(pip);
+  }
+
+  // create title paragraph
+  if (thisCard.title && thisCard.title.length > 0) {
+    let title = document.createElement("p");
+    title.classList.add("title");
+    title.innerHTML = thisCard.title;
+    // append to card immediately
+    card.append(title);
+  }
+
   // create text paragraph
   let text = document.createElement("p");
   text.classList.add("text")
-  // replace newlines in text string with br html
+  // debug version
+  //text.innerHTML = thisCard.text;
+  // new version
+  // parse text string, replace newlines with br html
   let textFilter = thisCard.text.split("");
   for (i in textFilter) {
     if (textFilter[i] === "\n") {
@@ -324,59 +381,49 @@ function renderCard(thisCard, field) {
   }
   textFilter = textFilter.join("");
   text.innerHTML = textFilter;
-  // safe old version
-  //text.innerHTML = thisCard.text;
+  // append to card
+  card.append(text);
 
 
-  // create pip paragraph
-  if (thisCard.pip && thisCard.pip.length > 0) {
-    let pip = document.createElement("p");
-    pip.classList.add("pip");
-    pip.innerHTML = thisCard.pip;
-    card.append(pip);
+  // create related paragraph
+  if (thisCard.related && thisCard.related.length > 0) {
+    let related = document.createElement("p");
+    related.classList.add("related")
+    related.innerHTML = thisCard.related;
+    
+    card.append(related);
   }
-  
-  // create title heading
-  if (thisCard.title && thisCard.title.length > 0) {
-    let title = document.createElement("p");
-    title.classList.add("title");
-    title.innerHTML = thisCard.title;
-    card.append(title);
-  }
+  // create menu div
+  let menu = document.createElement("div");
+  menu.classList.add("flexmenu")
 
-  
-  
-  
   // create timestamp paragraph
   let timestamp = document.createElement("p");
   timestamp.classList.add("timestamp");
   let date = new Date(thisCard.date);
   timestamp.append(date.toLocaleTimeString() + " • " + date.toLocaleDateString());
 
-
-  // create menu div
-  let menu = document.createElement("div");
-  menu.classList.add("flexmenu")
-
+  // create edit button
   let edit = document.createElement("button");
   edit.innerHTML = "edit";
   edit.id = thisCard.id;
   edit.onclick = function() {
     editCard(thisCard.id)
   };
+
+  // create delete button
   let remove = document.createElement("button");
-  remove.innerHTML = "remove";
+  remove.innerHTML = "X";
   remove.onclick = function() {
     deleteCard(thisCard.id)
   };
 
+  // append all menu items
   menu.append(timestamp);
-  menu.append(remove);
   menu.append(edit);
+  menu.append(remove);
 
-  // append elements to card
-  card.append(text);
-
+  // append menu to card
   card.append(menu);
 
   // append card to field

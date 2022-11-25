@@ -1,97 +1,90 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-16">
+  <head>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
   <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
+
+  <!-- editor modal -->
   <div id="cardEditModal" style="display: none;">
+    <!-- editor ui -->
     <div id="cardEdit">
 
       <div class="flexmenu">
         <button id="editCancel" onclick="editCancel()">X</button>
+        <span id="editTextLength">0</span>
         <button id="editSend" onclick="addCardEdits()" disabled>re-send it</button>
       </div>
       <textarea id="editText" maxlength="450" placeholder="write something"></textarea>
 
-      <div class="flexmenu">
-        <span id="editTextLength">0</span>
-      </div>
+    <div class="flexmenu">
+      <input id="editTitle" type="text" placeholder="title" maxlength="80"></input>
+      <input id="editPip" type="text" placeholder="pip" maxlength="4"></input>
+    </div>
+      
+    <div class="flexmenu">
+      <input id="editRelated" type="text" placeholder="#related"></input>
+    </div>
 
-      <!-- todo card meta update
-      <div class="flexmenu">
-        <input id="editTitle" type="text" placeholder="title" maxlength="80"></input>
-        <span>&nbsp;</span>
-        <input id="editPip" type="text" placeholder="pip" maxlength="3"></input>
-      </div>
-  
-      <input id="editRelated" type="text" placeholder="related"></input>
-      -->
+    <!-- todo chains update 
+    <div class="flexmenu">
+      <input id="editPrev" type="text" placeholder="prev"></input>
+      <span>&nbsp;</span>
+      <input id="editNext" type="text" placeholder="next"></input>
+    </div>
+    -->
 
-      <!-- todo chains update 
-      <div class="flexmenu">
-        <input id="editPrev" type="text" placeholder="prev"></input>
-        <span>&nbsp;</span>
-        <input id="editNext" type="text" placeholder="next"></input>
-      </div>
-      -->
-
-      <!-- todo images update
-      <input type="text" placeholder="front image"></input>
-      <input type="text" placeholder="font image alt"></input>
-      <input type="text" placeholder="back image"></input>
-      <input type="text" placeholder="back image alt"></input>
-      -->
+    <!-- todo images update
+    <input type="text" placeholder="front image"></input>
+    <input type="text" placeholder="font image alt"></input>
+    <input type="text" placeholder="back image"></input>
+    <input type="text" placeholder="back image alt"></input>
+    -->
 
     </div>
   </div>
   
-
+  <!-- composer ui -->
   <div id="cardComp" style="display: block;">
 
     <div class="flexmenu">
       <button id="newCancel" onclick="newCancel()" disabled>X</button>
       <span id="newTextLength">0</span>
-      <!--<button>add another</button>-->
       <button id="newSend" onclick="addCard()" disabled>send it</button>
     </div>
-    
-    <textarea id="newText" maxlength="450" placeholder="write something"></textarea>
 
-    <div class="flexmenu centered">
-    </div>
+    <textarea id="newText" maxlength="450" placeholder="write something"></textarea>
 
     <div class="flexmenu">
       <input id="newTitle" type="text" placeholder="title" maxlength="80"></input>
       <input id="newPip" type="text" placeholder="pip" maxlength="4"></input>
     </div>
 
-    <!--
     <div class="flexmenu">
-      <input id="newRelated" type="text" placeholder="related"></input>
+      <input id="newRelated" type="text" placeholder="#related"></input>
     </div>
-    -->
 
   </div>
 
-
+  <!-- deck view ui -->
   <div id="cardDeck" style="display: block;">
     <!-- field where cards will be rendered -->
   </div>
 
+  <!-- the deep magic -->
   <div class="flexmenu centered">
-    <button onclick="exportDeck()">export</button>
-    <!--<button onclick="clearDeck()">clear</button>-->
+    <button onclick="exportDeck()">export</button>&nbsp;
+    <button onclick="importDeck()">import</button>&nbsp;
+    <button onclick="clearDeck()">clear</button>
   </div>
 
-
+  
   <script src="script.js"></script>
 
-
 </body>
-
 </html>
