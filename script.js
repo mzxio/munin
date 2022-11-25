@@ -80,6 +80,33 @@ document.getElementById("editText").addEventListener("input", (event) => {
 })
 
 
+// RELATED FUNCTIONS
+
+function filterRelated(related) {
+  let filter = related.split("");
+  
+  for (i in filter) {
+    if (filter[i] === " ") {
+      filter[i] = "";
+    } else {
+      continue
+    }
+  }
+  filter = filter.join("");
+
+  filter = filter.split("#");
+  for (i in filter) {
+    if (filter[i].length === 0) {
+      delete filter[i];
+    } else {
+     continue
+    }
+  }
+
+    return filter;
+} 
+
+
 //  CARD FUNCTIONS
 
 
@@ -112,6 +139,7 @@ function addCard() {
       newRelated = related.value;
       // todo parse these as tags
       // work a helper into the deck.relations list 
+      //newRelated = filterRelated(related.value);
     }
 
     // add card to deck
@@ -158,6 +186,7 @@ function addCardEdits() {
     deck.cards[deck.active].text = text.value;
     deck.cards[deck.active].title = title.value;
     deck.cards[deck.active].pip = pip.value;
+    // todo more logic on related
     deck.cards[deck.active].related = related.value;
     deck.cards[deck.active].date = new Date().toISOString();
 
@@ -175,11 +204,11 @@ function addCardEdits() {
     document.getElementById("cardEditModal").style.display = "none";
     document.getElementById("cardComp").style.display = "block";
     document.getElementById("cardDeck").style.display = "block";
+
     // save altered deck
     saveDeck();
     // update cards display
     showAllCards();
-
   }
 }
 
@@ -306,7 +335,7 @@ function exportDeck() {
 
 
 function importDeck() {
-
+  alert("sorry not yet")
 }
 
 
