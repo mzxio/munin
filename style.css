@@ -125,6 +125,43 @@ button:disabled:active {
 }
 
 
+/* SELECTION STYLES */
+
+select {
+  -webkit-appearance: none;
+	-moz-appearance: none;
+  display: inline-block;
+  box-sizing: border-box;
+  border: none;
+
+
+  text-decoration: none;
+  font-family: "OpenSans", sans-serif;
+	font-size: 12pt;
+  line-height: 12pt;
+	font-weight: bold;
+	text-align: center;
+
+  cursor: pointer;
+
+  font-weight: normal;
+  
+	/*width: 100%;*/
+	padding: 8pt;
+	margin: 0;
+
+  border-bottom: 2pt solid #222;
+	outline: none;
+	overflow: auto;
+	resize: none;
+
+	border-radius: none;
+
+	background-color: #000;
+	color: #fff;
+}
+
+
 /* TEXT INPUT AND CARDS
  MIRROR EACH OTHER */
 
@@ -168,6 +205,7 @@ input[type=text] {
 .card .pip {
   font-weight: bold;
   color: #888;
+  user-select: text;
 }
 
 .card .title {
@@ -176,6 +214,7 @@ input[type=text] {
   font-size:12pt;
   line-height: 16pt;
   font-weight: bold;
+  user-select: text;
 }
 
 .card .text {
@@ -214,12 +253,12 @@ input[type=text] {
 }
 
 .centered {
-  justify-content: center;
+  justify-content: space-around;
 }
 
 #cardComp,
 #cardEdit,
-#cardDeck {
+#deckView {
   display: block;
 	max-width: 4in;
 	margin: 20pt auto;

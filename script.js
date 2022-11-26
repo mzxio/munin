@@ -26,8 +26,7 @@ function defaultDeck() {
   }
 }
 
-// initialize deck
-// the actual object that gets used
+// initialize deck object
 var deck = {};
 
 // check for saved deck in storage and load if found
@@ -203,7 +202,7 @@ function addCardEdits() {
     // disable edit modal and return to normal display
     document.getElementById("cardEditModal").style.display = "none";
     document.getElementById("cardComp").style.display = "block";
-    document.getElementById("cardDeck").style.display = "block";
+    document.getElementById("deckModal").style.display = "block";
 
     // save altered deck
     saveDeck();
@@ -236,7 +235,7 @@ function editCard(id) {
       document.getElementById("editSend").disabled = false;
       document.getElementById("cardEditModal").style.display = "block";
       document.getElementById("cardComp").style.display = "none";
-      document.getElementById("cardDeck").style.display = "none";
+      document.getElementById("deckModal").style.display = "none";
 
       break
     } else {
@@ -291,7 +290,7 @@ function editCancel() {
   // switch back to composer view
   document.getElementById("cardEditModal").style.display = "none";
   document.getElementById("cardComp").style.display = "block";
-  document.getElementById("cardDeck").style.display = "block";
+  document.getElementById("deckModal").style.display = "block";
 }
 
 
@@ -351,7 +350,7 @@ function importDeck() {
 
 // render field of cards, currently all cards newest to oldest
 function showAllCards() {
-  let field = document.getElementById("cardDeck");
+  let field = document.getElementById("deckView");
   field.innerHTML = null;
 
   //for(i in deck.cards) {
