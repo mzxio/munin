@@ -148,6 +148,8 @@ function addCard() {
       title: newTitle,
       pip: newPip,
       related: newRelated,
+      prev: "",
+      next: "",
       date: new Date().toISOString()
     })
 
@@ -440,15 +442,15 @@ function renderCard(thisCard, field) {
 
   // create delete button
   let remove = document.createElement("button");
-  remove.innerHTML = "X";
+  remove.innerHTML = "trash";
   remove.onclick = function() {
     deleteCard(thisCard.id)
   };
 
   // append all menu items
   menu.append(timestamp);
-  menu.append(edit);
   menu.append(remove);
+  menu.append(edit);
 
   // append menu to card
   card.append(menu);
