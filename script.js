@@ -248,18 +248,25 @@ function editCard(id) {
 // fired by "remove" button click in card
 function deleteCard(id) {
   let newCards = [];
+  let oldCard = {};
   for (i in deck.cards) {
     if (deck.cards[i].id === id) {
-      //console.log("delete "+id)
-      continue
+      // send deleted cards into the trash
+      oldCard = deck.cards[i];
+      deck.trash.push(oldCard);
+      //continue
     } else {
       newCards.push(deck.cards[i]);
     }
   }
+  // set deck to new filtered deck
   deck.cards = newCards;
-  if (newCards.length === 0) {
-    deck.id = 1;
-  }
+  // reset ids if all cards deleted
+  // disabled because trash uses post ids
+  //if (newCards.length === 0) {
+  //  deck.id = 1;
+  //}
+  // save and refresh deck
   saveDeck();
   showAllCards();
 }
