@@ -82,8 +82,9 @@ document.getElementById("editText").addEventListener("input", (event) => {
 // RELATED FUNCTIONS
 
 function filterRelated(related) {
-  let filter = related.split("");
-  
+  //let filter = related.split("");
+  let filter = related.split(/[, ]+/)//.filter(element => element);
+  /*
   for (i in filter) {
     if (filter[i] === " ") {
       filter[i] = "";
@@ -98,12 +99,12 @@ function filterRelated(related) {
     if (filter[i].length === 0) {
       delete filter[i];
     } else {
-     continue
+      continue
     }
   }
-
-    return filter;
-} 
+  */
+  return filter;
+}
 
 
 //  CARD FUNCTIONS
@@ -138,7 +139,7 @@ function addCard() {
       newRelated = related.value;
       // todo parse these as tags
       // work a helper into the deck.relations list 
-      //newRelated = filterRelated(related.value);
+      newRelated = filterRelated(related.value);
     }
 
     // add card to deck
@@ -325,7 +326,32 @@ function clearDeck() {
   showAllCards();
 }
 
+// experimental export deck as a  ???
+function exportDeckExp() {
 
+  // old deprecated way of doin it
+  //let encode = btoa(JSON.stringify(deck));
+  //let decode = atob(encode);
+  //return encode;
+
+  let encoder = new TextEncoder();
+  let decoder = new TextDecoder();
+  let view = encoder.encode(JSON.stringify(deck));
+  let reverse = decoder.decode(view)
+  return view.toString();
+
+  // even more experimental image conversion
+  /*
+  let wh = Math.round(Math.sqrt(view.length));
+
+  let canvas = document.getElementById("canvas");
+  let ctx = canvas.getContext("2d");
+  let imageData = new ImageData(view, wh, wh);
+  ctx.putImageData(imageData, 0, 0);
+  */
+}
+
+// export deck as a plain text json file
 function exportDeck() {
   let save = JSON.stringify(deck);
   //console.log(save)
@@ -375,15 +401,6 @@ function renderCard(thisCard, field) {
   let card = document.createElement("div");
   card.classList.add("card");
 
-  // create pip paragraph
-  if (thisCard.pip && thisCard.pip.length > 0) {
-    let pip = document.createElement("p");
-    pip.classList.add("pip");
-    pip.innerHTML = thisCard.pip;
-    // append to card immediately
-    card.append(pip);
-  }
-
   // create title paragraph
   if (thisCard.title && thisCard.title.length > 0) {
     let title = document.createElement("p");
@@ -413,13 +430,22 @@ function renderCard(thisCard, field) {
   // append to card
   card.append(text);
 
+  // create pip paragraph
+  if (thisCard.pip && thisCard.pip.length > 0) {
+    let pip = document.createElement("p");
+    pip.classList.add("pip");
+    pip.innerHTML = thisCard.pip;
+    // append to card immediately
+    card.append(pip);
+  }
+
 
   // create related paragraph
   if (thisCard.related && thisCard.related.length > 0) {
     let related = document.createElement("p");
     related.classList.add("related")
     related.innerHTML = thisCard.related;
-    
+
     card.append(related);
   }
   // create menu div
