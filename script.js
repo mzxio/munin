@@ -376,14 +376,10 @@ function importDeck() {
 // DISPLAY FUNCTIONS
 
 
-// render field of cards, currently all cards newest to oldest
+// render field of cards, newest to oldest
 function showAllCards() {
   let field = document.getElementById("deckView");
-  field.innerHTML = null;
-
-  //for(i in deck.cards) {
-  //console.log(cardbox.decks[i]);
-  //}
+  field.innerHTML = "";
 
   for (let i = deck.cards.length - 1; i >= 0; --i) {
     // debug
@@ -391,9 +387,41 @@ function showAllCards() {
 
     let thisCard = deck.cards[i];
     renderCard(thisCard, field)
+    //renderCardSimple(thisCard, field)
   }
 
 }
+
+
+// render field of cards, oldest to newest
+function showAllCardsOldest() {
+  let field = document.getElementById("deckView");
+  field.innerHTML = "";
+
+  for(i in deck.cards) {
+  //console.log(cardbox.decks[i]);
+    let thisCard = deck.cards[i];
+    renderCard(thisCard, field)
+    //renderCardSimple(thisCard, field)
+  }
+
+}
+
+
+// parse text string helper
+// replace newlines with br html
+function textFilter(text) {
+  let filter = text.split("");
+  for (i in filter) {
+    if (filter[i] === "\n") {
+      filter[i] = "<br/>"
+    } else {
+      continue
+    }
+  }
+  return filter.join("");  
+}
+
 
 // render individual card elements
 function renderCard(thisCard, field) {
@@ -413,21 +441,7 @@ function renderCard(thisCard, field) {
   // create text paragraph
   let text = document.createElement("p");
   text.classList.add("text")
-  // debug version
-  //text.innerHTML = thisCard.text;
-  // new version
-  // parse text string, replace newlines with br html
-  let textFilter = thisCard.text.split("");
-  for (i in textFilter) {
-    if (textFilter[i] === "\n") {
-      textFilter[i] = "<br/>"
-    } else {
-      continue
-    }
-  }
-  textFilter = textFilter.join("");
-  text.innerHTML = textFilter;
-  // append to card
+  text.innerHTML = textFilter(thisCard.text);
   card.append(text);
 
   // create pip paragraph
@@ -435,17 +449,14 @@ function renderCard(thisCard, field) {
     let pip = document.createElement("p");
     pip.classList.add("pip");
     pip.innerHTML = thisCard.pip;
-    // append to card immediately
     card.append(pip);
   }
-
 
   // create related paragraph
   if (thisCard.related && thisCard.related.length > 0) {
     let related = document.createElement("p");
     related.classList.add("related")
     related.innerHTML = thisCard.related;
-
     card.append(related);
   }
   // create menu div
@@ -486,4 +497,37 @@ function renderCard(thisCard, field) {
 }
 
 
+// render individual card elements
+// simple style, no meta
+function renderCardSimple(thisCard, field) {
 
+  // create master card div
+  let card = document.createElement("div");
+  card.classList.add("card");
+  //card.classList.add("simple");
+
+  // create pip paragraph
+  if (thisCard.pip && thisCard.pip.length > 0) {
+    let pip = document.createElement("p");
+    pip.classList.add("pip");
+    pip.innerHTML = thisCard.pip;
+    card.append(pip);
+  }
+  
+  // create title paragraph
+  if (thisCard.title && thisCard.title.length > 0) {
+    let title = document.createElement("p");
+    title.classList.add("title");
+    title.innerHTML = thisCard.title;
+    card.append(title);
+  }
+
+  // create text paragraph
+  let text = document.createElement("p");
+  text.classList.add("text")
+  text.innerHTML = textFilter(thisCard.text);
+  card.append(text);
+
+  // append card to field
+  field.append(card);
+}

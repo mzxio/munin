@@ -143,11 +143,9 @@ select {
 	text-align: center;
 
   cursor: pointer;
-
-  font-weight: normal;
   
 	/*width: 100%;*/
-	padding: 8pt;
+	padding: 4pt;
 	margin: 0;
 
   border-bottom: 2pt solid #222;
@@ -158,7 +156,33 @@ select {
 	border-radius: none;
 
 	background-color: #000;
-	color: #fff;
+	color: turquoise;
+}
+
+
+input[type=checkbox] {
+  -webkit-appearance: none;
+	-moz-appearance: none;
+  display: inline-block;
+  box-sizing: border-box;
+  height:12pt;
+  width:12pt;
+  background-color: #222;
+  border: 2pt solid turquoise;
+  border-radius: 6pt;
+  transition: box-shadow .3s;
+}
+
+input[type=checkbox]:checked {
+  box-shadow: inset 0 0 0 12pt aquamarine;
+  border: 0;
+}
+
+label {
+  margin: 0 4pt;
+  padding: 4pt 0;
+  color: #888;
+  font-weight: normal;
 }
 
 
@@ -194,6 +218,8 @@ input[type=text] {
   padding: 4pt;
   margin: 4pt 0;
 }
+
+
 
 
 /* CARD INNER CLASSES */
