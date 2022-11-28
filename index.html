@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+  
   <!-- editor modal -->
   <div id="cardEditModal" style="display: none;">
     <!-- editor ui -->
@@ -70,15 +70,20 @@
 
   </div>
 
-  <!-- view control for text ui -->
-  <div class="flexmenu centered">
-    <label for="new">Composer</label>
-    <input type="checkbox" id="new" checked></input>
-  </div>
-  
   <!-- view controls ui -->
-  <div id="viewMenu">
+  <div class="flexmenu centered">
+    <button id="viewMenuToggle" onclick="menuToggle();">≡</button>
+  </div>
 
+  <div id="viewMenu" style="display: none;">
+    <br/>
+    
+    <div class="flexmenu centered">
+      <label for="new">Composer</label>
+      <input type="checkbox" id="new" checked></input>
+      <label for="share">Share</label>
+      <input type="checkbox" id="share"></input>
+    </div>
 
     <div class="flexmenu centered">
       <label for="">View</label>

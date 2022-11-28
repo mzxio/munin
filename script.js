@@ -78,6 +78,24 @@ document.getElementById("editText").addEventListener("input", (event) => {
   }
 })
 
+function menuToggle() {  
+  let viewMenu = document.getElementById("viewMenu");
+  let viewMenuState = viewMenu.style.display;
+  console.log(viewMenuState)
+  
+  if (viewMenuState === "none") {
+    document.getElementById("viewMenu").style.display = "block";
+    document.getElementById("viewMenuToggle").innerHTML = "X";
+  }
+  if (viewMenuState === "block") {
+    document.getElementById("viewMenu").style.display = "none";
+    document.getElementById("viewMenuToggle").innerHTML = "≡";
+  } 
+
+  console.log(viewMenuState)
+}
+  
+
 
 // RELATED FUNCTIONS
 
