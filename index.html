@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
@@ -70,14 +70,29 @@
 
   </div>
 
-
+  <!-- view control for text ui -->
+  <div class="flexmenu centered">
+    <label for="new">Composer</label>
+    <input type="checkbox" id="new" checked></input>
+  </div>
+  
   <!-- view controls ui -->
-  <!--
   <div id="viewMenu">
 
+
     <div class="flexmenu centered">
-      <input type="checkbox" id="new" checked></input>
-      <label for="new">Write</label>
+      <label for="">View</label>
+      <select>
+        <option>Timeline</option>
+        <option>Cards</option>
+        <!-- todo print view --><option>Print</option>
+        <!-- todo graph view --><option>Relations</option>
+      </select>
+
+      <label for="meta">Meta</label>
+      <input type="checkbox" id="meta" checked></input>
+      <label for="tools">Tools</label>
+      <input type="checkbox" id="tools" checked></input>
     </div>
 
     <div class="flexmenu centered">
@@ -88,19 +103,15 @@
         <option>26</option>
         <option>13</option>
       </select>
-      <label for="sort">sorted</label>
+      <label for="sort">Sorted</label>
       <select name="sort">
         <option selected>newest to oldest</option>
         <option>oldest to newest</option>
       </select>
-        <input type="checkbox" id="meta" checked></input>
-        <label for="meta">Meta</label>
-        <input type="checkbox" id="tools" checked></input>
-        <label for="tools">Tools</label>
     </div>
 
+    
   </div>
-  -->
   
   <!-- deck view ui -->
   <div id="deckModal" style="display: block;">
@@ -118,18 +129,18 @@
     </div>
   </div>
 
-  
-  <!-- the deep magic -->
-  <div class="flexmenu centered">
-    <button onclick="exportDeck();">export</button>&nbsp;
-    <!--<button onclick="importDeck();">import</button>&nbsp;-->
-    <button onclick="clearDeck();">clear</button>
-  </div>
-
   <!-- experimenting with image encoding
   <canvas id="canvas"></canvas>
   -->
 
+  <!-- the deep magic -->
+  <div class="flexmenu centered">
+    <label>Deck</label>
+    <button onclick="exportDeck();">export</button>&nbsp;
+    <button onclick="importDeck();">import</button>&nbsp;
+    <button onclick="clearDeck();">clear</button>
+  </div>
+  
   <script src="script.js"></script>
 
 </body>
