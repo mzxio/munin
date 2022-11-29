@@ -12,6 +12,7 @@
 }*/
 
 
+
 // ON STARTUP
 
 
@@ -36,6 +37,7 @@ if (window.localStorage.getItem("deck")) {
 } else {
   deck = defaultDeck();
 }
+
 
 
 // EVENT LISTENERS
@@ -78,10 +80,16 @@ document.getElementById("editText").addEventListener("input", (event) => {
   }
 })
 
+
+
+// UI FUNCTIONS
+
+
+// hotdog menu
 function menuToggle() {  
   let viewMenu = document.getElementById("viewMenu");
   let viewMenuState = viewMenu.style.display;
-  console.log(viewMenuState)
+  //console.log(viewMenuState)
   
   if (viewMenuState === "none") {
     document.getElementById("viewMenu").style.display = "block";
@@ -91,38 +99,60 @@ function menuToggle() {
     document.getElementById("viewMenu").style.display = "none";
     document.getElementById("viewMenuToggle").innerHTML = "≡";
   } 
-
-  console.log(viewMenuState)
-}
   
+  //console.log(viewMenuState)
+  showAllCards()
+}
+
+// "X" button in composer
+function newCancel() {
+  // reset input elements
+  document.getElementById("newText").value = "";
+  document.getElementById("newTextLength").innerHTML = 0;
+  document.getElementById("newSend").disabled = true;
+  document.getElementById("newCancel").disabled = true;
+}
+
+// "X" button in editor
+function editCancel() {
+  // clear active card id
+  deck.active = null;
+  // reset input elements
+  document.getElementById("editText").value = "";
+  document.getElementById("editTextLength").innerHTML = 0;
+  document.getElementById("editSend").disabled = true;
+  // switch back to composer view
+  document.getElementById("cardEditModal").style.display = "none";
+  document.getElementById("cardComp").style.display = "block";
+  document.getElementById("deckModal").style.display = "block";
+}
 
 
-// RELATED FUNCTIONS
+// HELPERS
 
+// parse related string
 function filterRelated(related) {
   //let filter = related.split("");
-  let filter = related.split(/[, ]+/)//.filter(element => element);
-  /*
-  for (i in filter) {
-    if (filter[i] === " ") {
-      filter[i] = "";
-    } else {
-      continue
-    }
-  }
-  filter = filter.join("");
-
-  filter = filter.split("#");
-  for (i in filter) {
-    if (filter[i].length === 0) {
-      delete filter[i];
-    } else {
-      continue
-    }
-  }
-  */
+  //console.log(related)
+  let filter = related.split(", ").filter(element => element);  
+  
+  //console.log(filter)
   return filter;
 }
+
+// parse text string, replace newlines with br html
+function filterText(text) {
+  let filter = text.split("");
+  for (i in filter) {
+    if (filter[i] === "\n") {
+      filter[i] = "<br/>"
+    } else {
+      continue
+    }
+  }
+  return filter.join("");  
+}
+
 
 
 //  CARD FUNCTIONS
@@ -207,7 +237,7 @@ function addCardEdits() {
     deck.cards[deck.active].title = title.value;
     deck.cards[deck.active].pip = pip.value;
     // todo more logic on related
-    deck.cards[deck.active].related = related.value;
+    deck.cards[deck.active].related = filterRelated(related.value);
     deck.cards[deck.active].date = new Date().toISOString();
 
     deck.active = null;
@@ -291,28 +321,6 @@ function deleteCard(id) {
   showAllCards();
 }
 
-// fired by "X" button click in composer
-function newCancel() {
-  // reset input elements
-  document.getElementById("newText").value = "";
-  document.getElementById("newTextLength").innerHTML = 0;
-  document.getElementById("newSend").disabled = true;
-  document.getElementById("newCancel").disabled = true;
-}
-
-// fired by "X" button in editor
-function editCancel() {
-  // clear active card id
-  deck.active = null;
-  // reset input elements
-  document.getElementById("editText").value = "";
-  document.getElementById("editTextLength").innerHTML = 0;
-  document.getElementById("editSend").disabled = true;
-  // switch back to composer view
-  document.getElementById("cardEditModal").style.display = "none";
-  document.getElementById("cardComp").style.display = "block";
-  document.getElementById("deckModal").style.display = "block";
-}
 
 
 // DECK FUNCTIONS
@@ -327,7 +335,6 @@ function saveDeck() {
   window.localStorage.setItem("deck", save);
 }
 
-
 function loadDeck() {
   // assuming check on local storage already done, grab save
   let save = window.localStorage.getItem("deck");
@@ -337,11 +344,26 @@ function loadDeck() {
   showAllCards();
 }
 
-
 function clearDeck() {
   window.localStorage.clear()
   deck = defaultDeck();
   showAllCards();
+}
+
+// export deck as a plain text json file
+function exportDeck() {
+  let save = JSON.stringify(deck);
+  //console.log(save)
+
+  let filename = "editor-export.json";
+  let element = document.createElement("a");
+  element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(save));
+  element.setAttribute("download", filename);
+  element.style.display = "none";
+
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
 }
 
 // experimental export deck as a  ???
@@ -369,26 +391,10 @@ function exportDeckExp() {
   */
 }
 
-// export deck as a plain text json file
-function exportDeck() {
-  let save = JSON.stringify(deck);
-  //console.log(save)
-
-  let filename = "editor-export.json";
-  let element = document.createElement("a");
-  element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(save));
-  element.setAttribute("download", filename);
-  element.style.display = "none";
-
-  document.body.appendChild(element);
-  element.click();
-  document.body.removeChild(element);
-}
-
-
 function importDeck() {
   alert("sorry not yet")
 }
+
 
 
 // DISPLAY FUNCTIONS
@@ -410,7 +416,6 @@ function showAllCards() {
 
 }
 
-
 // render field of cards, oldest to newest
 function showAllCardsOldest() {
   let field = document.getElementById("deckView");
@@ -425,33 +430,23 @@ function showAllCardsOldest() {
 
 }
 
-
-// parse text string helper
-// replace newlines with br html
-function textFilter(text) {
-  let filter = text.split("");
-  for (i in filter) {
-    if (filter[i] === "\n") {
-      filter[i] = "<br/>"
-    } else {
-      continue
-    }
-  }
-  return filter.join("");  
-}
-
-
 // render individual card elements
 function renderCard(thisCard, field) {
   // create master card div
   let card = document.createElement("div");
   card.classList.add("card");
 
+  // create menu div
+  let menu = document.createElement("div");
+  menu.classList.add("flexmenu")
+
+  
   // create title paragraph
   if (thisCard.title && thisCard.title.length > 0) {
     let title = document.createElement("p");
     title.classList.add("title");
     title.innerHTML = thisCard.title;
+
     // append to card immediately
     card.append(title);
   }
@@ -459,7 +454,8 @@ function renderCard(thisCard, field) {
   // create text paragraph
   let text = document.createElement("p");
   text.classList.add("text")
-  text.innerHTML = textFilter(thisCard.text);
+  text.innerHTML = filterText(thisCard.text);
+
   card.append(text);
 
   // create pip paragraph
@@ -467,45 +463,56 @@ function renderCard(thisCard, field) {
     let pip = document.createElement("p");
     pip.classList.add("pip");
     pip.innerHTML = thisCard.pip;
+
     card.append(pip);
   }
 
-  // create related paragraph
-  if (thisCard.related && thisCard.related.length > 0) {
-    let related = document.createElement("p");
-    related.classList.add("related")
-    related.innerHTML = thisCard.related;
-    card.append(related);
+  let controls = document.getElementById("viewMenu").elements
+
+  if (controls.meta.checked) {
+    // create related paragraph
+    if (thisCard.related && thisCard.related.length > 0) {
+      let related = document.createElement("p");
+      related.classList.add("related")
+      related.innerHTML = thisCard.related.join(", ");
+
+      card.append(related);
+    }
+  
+    // create timestamp paragraph
+    let timestamp = document.createElement("p");
+    timestamp.classList.add("timestamp");
+    let date = new Date(thisCard.date);
+    timestamp.append(date.toLocaleTimeString() + " • " + date.toLocaleDateString());
+
+    menu.append(timestamp);
   }
-  // create menu div
-  let menu = document.createElement("div");
-  menu.classList.add("flexmenu")
 
-  // create timestamp paragraph
-  let timestamp = document.createElement("p");
-  timestamp.classList.add("timestamp");
-  let date = new Date(thisCard.date);
-  timestamp.append(date.toLocaleTimeString() + " • " + date.toLocaleDateString());
+  
+  if (controls.tools.checked) {
+    // create edit button
+    let edit = document.createElement("button");
+    edit.innerHTML = "edit";
+    edit.id = thisCard.id;
+    edit.onclick = function() {
+      editCard(thisCard.id)
+    };
+  
+    // create delete button
+    let remove = document.createElement("button");
+    remove.innerHTML = "trash";
+    remove.onclick = function() {
+      deleteCard(thisCard.id)
+    };
 
-  // create edit button
-  let edit = document.createElement("button");
-  edit.innerHTML = "edit";
-  edit.id = thisCard.id;
-  edit.onclick = function() {
-    editCard(thisCard.id)
-  };
+    menu.append(remove);
+    menu.append(edit);
+  }
 
-  // create delete button
-  let remove = document.createElement("button");
-  remove.innerHTML = "trash";
-  remove.onclick = function() {
-    deleteCard(thisCard.id)
-  };
+
 
   // append all menu items
-  menu.append(timestamp);
-  menu.append(remove);
-  menu.append(edit);
+
 
   // append menu to card
   card.append(menu);
@@ -514,8 +521,6 @@ function renderCard(thisCard, field) {
   field.append(card);
 }
 
-
-// render individual card elements
 // simple style, no meta
 function renderCardSimple(thisCard, field) {
 
@@ -543,9 +548,12 @@ function renderCardSimple(thisCard, field) {
   // create text paragraph
   let text = document.createElement("p");
   text.classList.add("text")
-  text.innerHTML = textFilter(thisCard.text);
+  text.innerHTML = filterText(thisCard.text);
   card.append(text);
 
   // append card to field
   field.append(card);
 }
+
+
+

@@ -29,7 +29,7 @@
     </div>
 
     <div class="flexmenu">
-      <input id="editRelated" type="text" autocomplete="off" maxlength="450" placeholder="#related"></input>
+      <input id="editRelated" type="text" autocomplete="off" maxlength="450" placeholder="related, ..."></input>
     </div>
 
     <div class="flexmenu">
@@ -65,7 +65,7 @@
     </div>
 
     <div class="flexmenu">
-      <input id="newRelated" type="text" autocomplete="off" maxlength="450" placeholder="#related"></input>
+      <input id="newRelated" type="text" autocomplete="off" maxlength="450" placeholder="related, ..."></input>
     </div>
 
   </div>
@@ -75,7 +75,7 @@
     <button id="viewMenuToggle" onclick="menuToggle();">≡</button>
   </div>
 
-  <div id="viewMenu" style="display: none;">
+  <form id="viewMenu" style="display: none;">
     <br/>
     
     <div class="flexmenu centered">
@@ -86,12 +86,13 @@
     </div>
 
     <div class="flexmenu centered">
-      <label for="">View</label>
-      <select>
+      <label for="view">View</label>
+      <select id="view">
         <option>Timeline</option>
         <option>Cards</option>
-        <!-- todo print view --><option>Print</option>
-        <!-- todo graph view --><option>Relations</option>
+        <option>Print</option>
+        <option>Relations</option>
+        <option>Graph</option>
       </select>
 
       <label for="meta">Meta</label>
@@ -102,21 +103,21 @@
 
     <div class="flexmenu centered">
       <label for="show">Show</label>
-      <select name="show">
+      <select id="show">
         <option selected>all</option>
         <option>54</option>
         <option>26</option>
         <option>13</option>
       </select>
       <label for="sort">Sorted</label>
-      <select name="sort">
+      <select id="sort">
         <option selected>newest to oldest</option>
         <option>oldest to newest</option>
       </select>
     </div>
 
     
-  </div>
+  </form>
   
   <!-- deck view ui -->
   <div id="deckModal" style="display: block;">
