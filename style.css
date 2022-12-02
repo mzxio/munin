@@ -1,42 +1,60 @@
 
+/* OLD COLORS  */
+
+/*
+aquamarine
+turquoise
+darkturquoise
+#222
+#888
+black
+white
+*/
+
+/* NEW COLORS  */
+
+/*
+aquamarine       #7fffd4 
+dark turquoise   #57a7a3
+almost white     #eefdf9
+dark purp        #453f51
+teracotta style  #ef986c
+deep red         #cc5140
+*/
+
+
+
 /* WEBFONT DECLARATIONS */
 
 
 @font-face {
     font-family: 'OpenSans';
-    src: url('/fonts/OpenSans-Regular-webfont.woff') format('woff');
+    src: url('/assets/fonts/OpenSans-Regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'OpenSans';
-    src: url('fonts/OpenSans-Bold-webfont.woff') format('woff');
+    src: url('/assets/fonts/OpenSans-Bold-webfont.woff') format('woff');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'OpenSans';
-    src: url('fonts/OpenSans-BoldItalic-webfont.woff') format('woff');
+    src: url('/assets/fonts/OpenSans-BoldItalic-webfont.woff') format('woff');
     font-weight: bold;
     font-style: italic;
 }
 
 @font-face {
     font-family: 'OpenSans';
-    src: url('/fonts/OpenSans-Italic-webfont.woff') format('woff');
+    src: url('/assets/fonts/OpenSans-Italic-webfont.woff') format('woff');
     font-weight: normal;
     font-style: italic;
 }
 
-
-
-/*{
-color: darkturquoise;
-color: turquoise;
-color: aquamarine;
-}*/
 
 
 /* PRIMARY STYLES */
@@ -53,7 +71,7 @@ body {
 
 ::selection {
     color: black;
-    background-color: aquamarine;
+    background-color: #7fffd4;
 }
 
 p {
@@ -86,7 +104,7 @@ button {
 	margin: 0;
 	padding: 4pt 8pt;
 	border-radius: 12pt;
-  background: turquoise;
+  background: #57a7a3;
 	color: black;
   text-decoration: none;
   font-family: "OpenSans", sans-serif;
@@ -101,7 +119,7 @@ button {
 
 button:hover/*,
 button:focus*/ {
-	background: aquamarine;
+	background: #7fffd4;
   color: black;
 }
 
@@ -122,6 +140,16 @@ button:disabled {
 
 button:disabled:active {
 	transform: none;
+}
+
+button.trash {
+  background-color: #cc5140;
+  color: black;
+}
+
+button.trash:hover {
+  background-color: #ef986c;
+  color: black;
 }
 
 
@@ -156,7 +184,7 @@ select {
 	border-radius: none;
 
 	background-color: #000;
-	color: turquoise;
+	color: #7fffd4;
 }
 
 
@@ -168,13 +196,13 @@ input[type=checkbox] {
   height:12pt;
   width:12pt;
   background-color: #222;
-  border: 2pt solid turquoise;
+  border: 2pt solid #57a7a3;
   border-radius: 6pt;
   transition: box-shadow .3s;
 }
 
 input[type=checkbox]:checked {
-  box-shadow: inset 0 0 0 12pt turquoise;
+  box-shadow: inset 0 0 0 12pt #7fffd4;
   border: 0;
 }
 
@@ -220,8 +248,6 @@ input[type=text] {
 }
 
 
-
-
 /* CARD INNER CLASSES */
 
 .card {
@@ -262,15 +288,22 @@ input[type=text] {
 .card button {
   font-size: 10pt;
   background-color: black;
-  color: darkturquoise;
+  color: #57a7a3;
 }
 
 .card button:hover {
-  background-color: aquamarine;
+  background-color: #7fffd4;
   color: black;
 }
 
+.card .trash {
+  color: #cc5140;
+}
 
+.card .trash:hover {
+  background-color: #ef986c;
+  color: black;
+}
 
 /* UI AREAS */
 
@@ -282,6 +315,29 @@ input[type=text] {
 .centered {
   justify-content: center;
   /*justify-content: space-around;*/
+}
+
+.badge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: 42pt;
+  max-height: 42pt;
+  z-index: -1;
+}
+
+
+@media print {
+  .noprint {
+    visibility: hidden;
+  }
+  .card {
+    background-color: white;
+    color: black;
+  }
+  hr {
+    border-color: black;
+  }
 }
 
 #cardComp,
@@ -311,7 +367,7 @@ input[type=text] {
 
 #newTextLength,
 #editTextLength {
-	color: turquoise;
+	color: #57a7a3;
 	font-size: 10pt;
 	font-weight: bold;
   /*font-family: monospace;*/

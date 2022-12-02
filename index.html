@@ -4,11 +4,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <title>Munin</title>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+  <link rel="manifest" href="/manifest.json"> <!--type="application/manifest+json">-->
+  <!-- https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/web-app-manifests -->
+  <!-- Crow icon by Bakunetsu Kaito from https://thenounproject.com/icon/crow-1125211/ -->
+
 </head>
 
 <body>
+
+  <div>
+    <img src="/assets/crow/crow-simple-512.png" class="badge" />
+  </div>
   
   <!-- editor modal -->
   <div id="cardEditModal" style="display: none;">
@@ -71,52 +79,62 @@
   </div>
 
   <!-- view controls ui -->
-  <div class="flexmenu centered">
+  <br/>
+  <div class="flexmenu centered noprint">
     <button id="viewMenuToggle" onclick="menuToggle();">≡</button>
   </div>
 
   <form id="viewMenu" style="display: none;">
     <br/>
-    
     <div class="flexmenu centered">
-      <label for="new">Composer</label>
-      <input type="checkbox" id="new" checked></input>
-      <label for="share">Share</label>
-      <input type="checkbox" id="share"></input>
+      <p>
+        <input type="checkbox" id="new" checked></input>
+        <label for="new">Compose</label>
+        <br/>
+        <input type="checkbox" id="meta" checked></input>
+        <label for="meta">Meta</label>
+        <br/>
+        <input type="checkbox" id="tools" checked></input>
+        <label for="tools">Tools</label>
+        <br/>
+        <input type="checkbox" id="share"></input>
+        <label for="share">Share</label>
+      </p>
+      <p>
+        <label for="show">Show</label>
+        <select id="show">
+          <option selected>All</option>
+          <option>54</option>
+          <option>26</option>
+          <option>13</option>
+        </select>
+        <br/>
+        <label for="sort">Sort</label>
+        <select id="sort">
+          <option selected>Newest to oldest</option>
+          <option>Oldest to newest</option>
+        </select>
+        <br/>
+        <label for="view">View</label>
+        <select id="view">
+          <option>Timeline</option>
+          <option>Cards</option>
+          <option>Print</option>
+          <option>Relations</option>
+          <option>Graph</option>
+        </select>
+      </p>
     </div>
 
+    <br/>
+    <!-- the deep magic -->
     <div class="flexmenu centered">
-      <label for="view">View</label>
-      <select id="view">
-        <option>Timeline</option>
-        <option>Cards</option>
-        <option>Print</option>
-        <option>Relations</option>
-        <option>Graph</option>
-      </select>
+      <label>Deck</label>
+      <button onclick="exportDeck();">export</button>&nbsp;
+      <button onclick="importDeck();">import</button>&nbsp;
+      <button onclick="clearDeck();" class="trash">clear</button>
+    </div>    
 
-      <label for="meta">Meta</label>
-      <input type="checkbox" id="meta" checked></input>
-      <label for="tools">Tools</label>
-      <input type="checkbox" id="tools" checked></input>
-    </div>
-
-    <div class="flexmenu centered">
-      <label for="show">Show</label>
-      <select id="show">
-        <option selected>all</option>
-        <option>54</option>
-        <option>26</option>
-        <option>13</option>
-      </select>
-      <label for="sort">Sorted</label>
-      <select id="sort">
-        <option selected>newest to oldest</option>
-        <option>oldest to newest</option>
-      </select>
-    </div>
-
-    
   </form>
   
   <!-- deck view ui -->
@@ -138,14 +156,6 @@
   <!-- experimenting with image encoding
   <canvas id="canvas"></canvas>
   -->
-
-  <!-- the deep magic -->
-  <div class="flexmenu centered">
-    <label>Deck</label>
-    <button onclick="exportDeck();">export</button>&nbsp;
-    <button onclick="importDeck();">import</button>&nbsp;
-    <button onclick="clearDeck();">clear</button>
-  </div>
   
   <script src="script.js"></script>
 

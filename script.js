@@ -15,7 +15,6 @@
 
 // ON STARTUP
 
-
 // the platonic ideal of a deck object
 function defaultDeck() {
   return {
@@ -41,7 +40,6 @@ if (window.localStorage.getItem("deck")) {
 
 
 // EVENT LISTENERS
-
 
 // when composer textarea changes update character counter/button
 document.getElementById("newText").addEventListener("input", (event) => {
@@ -84,9 +82,9 @@ document.getElementById("editText").addEventListener("input", (event) => {
 
 // UI FUNCTIONS
 
-
 // hotdog menu
 function menuToggle() {  
+  let controls = document.getElementById("viewMenu").elements;
   let viewMenu = document.getElementById("viewMenu");
   let viewMenuState = viewMenu.style.display;
   //console.log(viewMenuState)
@@ -99,6 +97,12 @@ function menuToggle() {
     document.getElementById("viewMenu").style.display = "none";
     document.getElementById("viewMenuToggle").innerHTML = "≡";
   } 
+
+  if (controls.new.checked) {
+    document.getElementById("cardComp").style.display = "block";
+  } else {
+    document.getElementById("cardComp").style.display = "none";
+  }
   
   //console.log(viewMenuState)
   showAllCards()
@@ -126,6 +130,7 @@ function editCancel() {
   document.getElementById("cardComp").style.display = "block";
   document.getElementById("deckModal").style.display = "block";
 }
+
 
 
 // HELPERS
@@ -156,7 +161,6 @@ function filterText(text) {
 
 
 //  CARD FUNCTIONS
-
 
 // fired by "send it" button click in the composer
 function addCard() {
@@ -285,7 +289,7 @@ function editCard(id) {
       // disable normal display and render edit modal
       document.getElementById("editSend").disabled = false;
       document.getElementById("cardEditModal").style.display = "block";
-      document.getElementById("cardComp").style.display = "none";
+      //document.getElementById("cardComp").style.display = "none";
       document.getElementById("deckModal").style.display = "none";
 
       break
@@ -324,7 +328,6 @@ function deleteCard(id) {
 
 
 // DECK FUNCTIONS
-
 
 function saveDeck() {
   // stringify current deck
@@ -399,7 +402,6 @@ function importDeck() {
 
 // DISPLAY FUNCTIONS
 
-
 // render field of cards, newest to oldest
 function showAllCards() {
   let field = document.getElementById("deckView");
@@ -432,6 +434,9 @@ function showAllCardsOldest() {
 
 // render individual card elements
 function renderCard(thisCard, field) {
+  // check view controls, toggles element rendering
+  let controls = document.getElementById("viewMenu").elements
+  
   // create master card div
   let card = document.createElement("div");
   card.classList.add("card");
@@ -440,14 +445,19 @@ function renderCard(thisCard, field) {
   let menu = document.createElement("div");
   menu.classList.add("flexmenu")
 
-  
+  // create pip paragraph
+  if (thisCard.pip && thisCard.pip.length > 0) {
+    let pip = document.createElement("p");
+    pip.classList.add("pip");
+    pip.innerHTML = thisCard.pip;
+    card.append(pip);
+  }
+
   // create title paragraph
   if (thisCard.title && thisCard.title.length > 0) {
     let title = document.createElement("p");
     title.classList.add("title");
     title.innerHTML = thisCard.title;
-
-    // append to card immediately
     card.append(title);
   }
 
@@ -455,19 +465,7 @@ function renderCard(thisCard, field) {
   let text = document.createElement("p");
   text.classList.add("text")
   text.innerHTML = filterText(thisCard.text);
-
   card.append(text);
-
-  // create pip paragraph
-  if (thisCard.pip && thisCard.pip.length > 0) {
-    let pip = document.createElement("p");
-    pip.classList.add("pip");
-    pip.innerHTML = thisCard.pip;
-
-    card.append(pip);
-  }
-
-  let controls = document.getElementById("viewMenu").elements
 
   if (controls.meta.checked) {
     // create related paragraph
@@ -487,7 +485,6 @@ function renderCard(thisCard, field) {
 
     menu.append(timestamp);
   }
-
   
   if (controls.tools.checked) {
     // create edit button
@@ -500,6 +497,7 @@ function renderCard(thisCard, field) {
   
     // create delete button
     let remove = document.createElement("button");
+    remove.classList.add("trash");
     remove.innerHTML = "trash";
     remove.onclick = function() {
       deleteCard(thisCard.id)
@@ -510,50 +508,11 @@ function renderCard(thisCard, field) {
   }
 
 
-
-  // append all menu items
-
-
   // append menu to card
   card.append(menu);
 
   // append card to field
   field.append(card);
 }
-
-// simple style, no meta
-function renderCardSimple(thisCard, field) {
-
-  // create master card div
-  let card = document.createElement("div");
-  card.classList.add("card");
-  //card.classList.add("simple");
-
-  // create pip paragraph
-  if (thisCard.pip && thisCard.pip.length > 0) {
-    let pip = document.createElement("p");
-    pip.classList.add("pip");
-    pip.innerHTML = thisCard.pip;
-    card.append(pip);
-  }
-  
-  // create title paragraph
-  if (thisCard.title && thisCard.title.length > 0) {
-    let title = document.createElement("p");
-    title.classList.add("title");
-    title.innerHTML = thisCard.title;
-    card.append(title);
-  }
-
-  // create text paragraph
-  let text = document.createElement("p");
-  text.classList.add("text")
-  text.innerHTML = filterText(thisCard.text);
-  card.append(text);
-
-  // append card to field
-  field.append(card);
-}
-
 
 
