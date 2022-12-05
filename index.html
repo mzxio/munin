@@ -5,11 +5,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Munin</title>
-  <link rel="stylesheet" href="style.css" type="text/css" />
-  <link rel="manifest" href="/manifest.json"> <!--type="application/manifest+json">-->
+  <link rel="stylesheet" href="editor.css" type="text/css" />
+  <link rel="manifest" href="/manifest.json" type="application/manifest+json">
   <!-- https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/web-app-manifests -->
   <!-- Crow icon by Bakunetsu Kaito from https://thenounproject.com/icon/crow-1125211/ -->
-
+  <!-- Favicon generator https://realfavicongenerator.net/favicon_checker?ignore_root_issues=true#.Y45XbXbMIow -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/site.webmanifest">
+  <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#57a7a3">
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#57a7a3">
+  <meta name="msapplication-TileImage" content="/assets/icons/mstile-144x144.png">
+  <meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+  <meta name="theme-color" content="#000000">
 </head>
 
 <body>
@@ -18,7 +28,6 @@
     <img src="/assets/crow/crow-simple-512.png" class="badge noprint" />
   </div>
 
-
   <!-- view controls ui -->
   <br/>
   <div class="flexmenu centered noprint">
@@ -26,14 +35,7 @@
   </div>
 
   <form id="viewMenu" class="noprint" style="display: none;">
-    <br/>
-    <!-- the deep magic -->
-    <div class="flexmenu centered">
-      <button onclick="exportDeck()">export</button>&nbsp;
-      <button onclick="importDeck()">import</button>&nbsp;
-      <button onclick="clearDeck()" class="trash">clear</button>
-    </div>    
-    <br/>
+    
     <div class="flexmenu centered">
       <p>
         <span>
@@ -46,10 +48,12 @@
         <br/>
         <input type="checkbox" id="tools" checked></input>
         <label for="tools">Tools</label>
-        <br/>
+        <br/><!--
         <input type="checkbox" id="share"></input>
         <label for="share">Share</label>
-      </p>
+        -->  
+    </p>
+      <!--
       <p>
         <label for="show">Show</label>
         <select id="show">
@@ -74,8 +78,25 @@
           <option>Graph</option>
         </select>
       </p>
+      -->
     </div>
 
+    <br/>
+<!--
+    <div class="flexmenu centered">
+      <input type="text" id="author" autocomplete="off" placeholder="author"></input>&nbsp;
+      <input type="text" id="name" autocomplete="off" placeholder="deck name"></input>
+    </div>
+
+    <br/>
+-->
+    <!-- the deep magic -->
+    <div class="flexmenu centered">
+      <button onclick="exportDeck()">export</button>&nbsp;
+      <!--<button onclick="importDeck()">import</button>&nbsp;-->
+      <button onclick="clearDeck()" class="trash">clear</button>
+    </div>    
+    
   </form>
 
   
@@ -100,13 +121,13 @@
     <div class="flexmenu">
       <input id="editRelated" type="text" autocomplete="off" maxlength="450" placeholder="related, ..."></input>
     </div>
-
+    <!--
     <div class="flexmenu">
       <input id="editPrev" type="text" placeholder="prev"></input>
       <span>&nbsp;</span>
       <input id="editNext" type="text" placeholder="next"></input>
     </div>
-
+    -->
     <!-- todo images update
     <input type="text" placeholder="front image"></input>
     <input type="text" placeholder="font image alt"></input>

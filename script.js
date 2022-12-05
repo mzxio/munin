@@ -15,6 +15,11 @@
 
 // ON STARTUP
 
+
+// initialize base objects
+var deck = {};
+var prefs = {};
+
 // the platonic ideal of a deck object
 function defaultDeck() {
   return {
@@ -26,9 +31,6 @@ function defaultDeck() {
   }
 }
 
-// initialize deck object
-var deck = {};
-
 // check for saved deck in storage and load if found
 // otherwise populate an empty deck
 if (window.localStorage.getItem("deck")) {
@@ -36,7 +38,6 @@ if (window.localStorage.getItem("deck")) {
 } else {
   deck = defaultDeck();
 }
-
 
 
 // EVENT LISTENERS
@@ -86,13 +87,13 @@ document.getElementById("editText").addEventListener("input", (event) => {
 function menuSettings() {
   let controls = document.getElementById("viewMenu").elements;
   let settings = {
-    "new": controls.new.checked,
-    "meta": controls.meta.checked,
-    "tools": controls.tools.checked,
-    "share": controls.share.checked,
-    "show": controls.show.options[controls.show.options.selectedIndex].innerText,
-    "sort": controls.sort.options[controls.sort.options.selectedIndex].innerText,
-    "view": controls.view.options[controls.view.options.selectedIndex].innerText
+    compose: controls.new.checked,
+    meta: controls.meta.checked,
+    tools: controls.tools.checked,
+    share: controls.share.checked,
+    show: controls.show.options[controls.show.options.selectedIndex].innerText,
+    sort: controls.sort.options[controls.sort.options.selectedIndex].innerText,
+    view: controls.view.options[controls.view.options.selectedIndex].innerText
   };
   return settings;
 }
@@ -120,6 +121,7 @@ function menuToggle() {
   }
   
   //console.log(viewMenuState)
+  prefs = menuSettings();
   showAllCards();
   //document.activeElement.blur();
 }

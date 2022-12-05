@@ -335,8 +335,9 @@ textarea::placeholder {
 
 .badge {
   position: absolute;
-  left: 0;
+  left: 50%;
   top: 0;
+  margin-left: -48pt;
   max-width: 42pt;
   max-height: 42pt;
   z-index: -1;
@@ -363,6 +364,13 @@ textarea::placeholder {
   display: block;
 	max-width: 4in;
 	margin: 20pt auto;
+  padding: 8pt;
+}
+
+#viewMenu {
+  display: block;
+	max-width: 4in;
+	margin: 0 auto;
   padding: 8pt;
 }
 
