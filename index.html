@@ -15,81 +15,31 @@
 <body>
 
   <div>
-    <img src="/assets/crow/crow-simple-512.png" class="badge" />
+    <img src="/assets/crow/crow-simple-512.png" class="badge noprint" />
   </div>
-  
-  <!-- editor modal -->
-  <div id="cardEditModal" style="display: none;">
-    <!-- editor ui -->
-    <div id="cardEdit">
 
-    <div class="flexmenu">
-      <button id="editCancel" onclick="editCancel();">X</button>
-      <span id="editTextLength">0</span>
-      <button id="editSend" onclick="addCardEdits();" disabled>re-send it</button>
-    </div>
-
-    <textarea id="editText" maxlength="450" placeholder="write something"></textarea>
-
-    <div class="flexmenu">
-      <input id="editTitle" type="text" autocomplete="off" maxlength="80" placeholder="title"></input>
-      <input id="editPip" type="text" autocomplete="off" maxlength="4" placeholder="pip"></input>
-    </div>
-
-    <div class="flexmenu">
-      <input id="editRelated" type="text" autocomplete="off" maxlength="450" placeholder="related, ..."></input>
-    </div>
-
-    <div class="flexmenu">
-      <input id="editPrev" type="text" placeholder="prev"></input>
-      <span>&nbsp;</span>
-      <input id="editNext" type="text" placeholder="next"></input>
-    </div>
-
-    <!-- todo images update
-    <input type="text" placeholder="front image"></input>
-    <input type="text" placeholder="font image alt"></input>
-    <input type="text" placeholder="back image"></input>
-    <input type="text" placeholder="back image alt"></input>
-    -->
-
-    </div>
-  </div>
-  
-  <!-- composer ui -->
-  <div id="cardComp" style="display: block;">
-
-    <div class="flexmenu">
-      <button id="newCancel" onclick="newCancel();" disabled>X</button>
-      <span id="newTextLength">0</span>
-      <button id="newSend" onclick="addCard();" disabled>send it</button>
-    </div>
-
-    <textarea id="newText" maxlength="450" placeholder="write something"></textarea>
-
-    <div class="flexmenu">
-      <input id="newTitle" type="text" autocomplete="off" maxlength="80" placeholder="title"></input>
-      <input id="newPip" type="text" autocomplete="off" maxlength="4" placeholder="pip"></input>
-    </div>
-
-    <div class="flexmenu">
-      <input id="newRelated" type="text" autocomplete="off" maxlength="450" placeholder="related, ..."></input>
-    </div>
-
-  </div>
 
   <!-- view controls ui -->
   <br/>
   <div class="flexmenu centered noprint">
-    <button id="viewMenuToggle" onclick="menuToggle();">≡</button>
+    <button id="viewMenuToggle" onclick="menuToggle()">≡</button>
   </div>
 
-  <form id="viewMenu" style="display: none;">
+  <form id="viewMenu" class="noprint" style="display: none;">
+    <br/>
+    <!-- the deep magic -->
+    <div class="flexmenu centered">
+      <button onclick="exportDeck()">export</button>&nbsp;
+      <button onclick="importDeck()">import</button>&nbsp;
+      <button onclick="clearDeck()" class="trash">clear</button>
+    </div>    
     <br/>
     <div class="flexmenu centered">
       <p>
-        <input type="checkbox" id="new" checked></input>
-        <label for="new">Compose</label>
+        <span>
+          <input type="checkbox" id="new" checked></input>
+          <label for="new">Compose</label>
+        </span>
         <br/>
         <input type="checkbox" id="meta" checked></input>
         <label for="meta">Meta</label>
@@ -126,16 +76,70 @@
       </p>
     </div>
 
-    <br/>
-    <!-- the deep magic -->
-    <div class="flexmenu centered">
-      <label>Deck</label>
-      <button onclick="exportDeck();">export</button>&nbsp;
-      <button onclick="importDeck();">import</button>&nbsp;
-      <button onclick="clearDeck();" class="trash">clear</button>
-    </div>    
-
   </form>
+
+  
+  <!-- editor modal -->
+  <div id="cardEditModal" style="display: none;">
+    <!-- editor ui -->
+    <div id="cardEdit">
+
+    <div class="flexmenu">
+      <button id="editCancel" onclick="editCancel()">X</button>
+      <span id="editTextLength">0</span>
+      <button id="editSend" onclick="addCardEdits()" disabled>re-send it</button>
+    </div>
+
+    <textarea id="editText" maxlength="450" placeholder="write something"></textarea>
+
+    <div class="flexmenu">
+      <input id="editTitle" type="text" autocomplete="off" maxlength="80" placeholder="title"></input>
+      <input id="editPip" type="text" autocomplete="off" maxlength="4" placeholder="pip"></input>
+    </div>
+
+    <div class="flexmenu">
+      <input id="editRelated" type="text" autocomplete="off" maxlength="450" placeholder="related, ..."></input>
+    </div>
+
+    <div class="flexmenu">
+      <input id="editPrev" type="text" placeholder="prev"></input>
+      <span>&nbsp;</span>
+      <input id="editNext" type="text" placeholder="next"></input>
+    </div>
+
+    <!-- todo images update
+    <input type="text" placeholder="front image"></input>
+    <input type="text" placeholder="font image alt"></input>
+    <input type="text" placeholder="back image"></input>
+    <input type="text" placeholder="back image alt"></input>
+    -->
+
+    </div>
+  </div>
+
+  
+  <!-- composer ui -->
+  <div id="cardComp" style="display: block;">
+
+    <div class="flexmenu">
+      <button id="newCancel" onclick="newCancel()" disabled>X</button>
+      <span id="newTextLength">0</span>
+      <button id="newSend" onclick="addCard()" disabled>send it</button>
+    </div>
+
+    <textarea id="newText" maxlength="450" placeholder="write something"></textarea>
+
+    <div class="flexmenu">
+      <input id="newTitle" type="text" autocomplete="off" maxlength="80" placeholder="title"></input>
+      <input id="newPip" type="text" autocomplete="off" maxlength="4" placeholder="pip"></input>
+    </div>
+
+    <div class="flexmenu">
+      <input id="newRelated" type="text" autocomplete="off" maxlength="450" placeholder="related, ..."></input>
+    </div>
+
+  </div>
+
   
   <!-- deck view ui -->
   <div id="deckModal" style="display: block;">

@@ -17,7 +17,9 @@ white
 aquamarine       #7fffd4 
 dark turquoise   #57a7a3
 almost white     #eefdf9
+mid purp         #8c849b
 dark purp        #453f51
+darker purp      #231f29
 teracotta style  #ef986c
 deep red         #cc5140
 */
@@ -61,7 +63,7 @@ deep red         #cc5140
 
 body {
 	background-color: black;
-	color: white;
+	color: #eefdf9;
 	margin: 0;
 	font-family: "OpenSans", sans-serif;
 	font-size: 12pt;
@@ -81,7 +83,7 @@ p {
 
 hr {
   border: none;
-  background-color: #222;
+  background-color: #231f29;
   height: 2pt;
   margin: 12pt 0;
 }
@@ -104,8 +106,9 @@ button {
 	margin: 0;
 	padding: 4pt 8pt;
 	border-radius: 12pt;
-  background: #57a7a3;
-	color: black;
+  color: #57a7a3;
+	background-color: black;
+  border: 2pt solid #57a7a3;
   text-decoration: none;
   font-family: "OpenSans", sans-serif;
 	font-size: 12pt;
@@ -119,8 +122,9 @@ button {
 
 button:hover/*,
 button:focus*/ {
-	background: #7fffd4;
+	background-color: #7fffd4;
   color: black;
+  border-color: transparent;
 }
 
 /*button:focus {
@@ -133,8 +137,9 @@ button:active {
 }
 
 button:disabled {
-	background-color: #222;
-  color: #888;
+	background-color: black;
+  color: #453f51;
+  border-color: #231f29;
 	cursor: default;
 }
 
@@ -143,12 +148,14 @@ button:disabled:active {
 }
 
 button.trash {
-  background-color: #cc5140;
-  color: black;
+  color: #cc5140;
+  border-color: #cc5140;
+  background-color: black;
 }
 
 button.trash:hover {
   background-color: #ef986c;
+  border-color: transparent;
   color: black;
 }
 
@@ -168,7 +175,7 @@ select {
 	font-size: 12pt;
   line-height: 12pt;
 	font-weight: bold;
-	text-align: center;
+	text-align: left;
 
   cursor: pointer;
   
@@ -176,7 +183,7 @@ select {
 	padding: 4pt;
 	margin: 0;
 
-  border-bottom: 2pt solid #222;
+  border-bottom: 2pt solid #231f29;
 	outline: none;
 	overflow: auto;
 	resize: none;
@@ -195,7 +202,7 @@ input[type=checkbox] {
   box-sizing: border-box;
   height:12pt;
   width:12pt;
-  background-color: #222;
+  background-color: black;
   border: 2pt solid #57a7a3;
   border-radius: 6pt;
   transition: box-shadow .3s;
@@ -209,8 +216,8 @@ input[type=checkbox]:checked {
 label {
   margin: 0 4pt;
   padding: 4pt 0;
-  color: #888;
-  font-weight: normal;
+  color: #8c849b;
+  font-weight: bold;
 }
 
 
@@ -226,7 +233,7 @@ textarea,
 	padding: 8pt;
 	margin: 8pt 0;
 	border: none;
-  border-bottom: 2pt solid #222;
+  border-bottom: 2pt solid #231f29;
 	outline: none;
 	overflow: auto;
 	resize: none;
@@ -234,7 +241,7 @@ textarea,
 	border-radius: none;
 
 	background-color: #000;
-	color: #fff;
+	color: #eefdf9;
 
 	font-size: 12pt;
 	line-height: 16pt;
@@ -247,17 +254,22 @@ input[type=text] {
   margin: 4pt 0;
 }
 
+input::placeholder,
+textarea::placeholder {
+  color: #8c849b;
+}
+
 
 /* CARD INNER CLASSES */
 
 .card {
-  border-bottom: 2pt solid #222;
+  border-bottom: 2pt solid #231f29;
 }
 
 .card .pip {
   font-size: 10pt;
   font-weight: bold;
-  color: #888;
+  color: #8c849b;
   user-select: text;
 }
 
@@ -280,7 +292,7 @@ input[type=text] {
 .card .timestamp,
 .card .related {
 	font-size: 10pt;
-	color: #888;
+	color: #8c849b;
 	margin: 4pt 0;
   user-select: text;  
 }
@@ -289,20 +301,24 @@ input[type=text] {
   font-size: 10pt;
   background-color: black;
   color: #57a7a3;
+  border: none;
 }
 
 .card button:hover {
   background-color: #7fffd4;
   color: black;
+  border: none;
 }
 
 .card .trash {
   color: #cc5140;
+  border: none;
 }
 
 .card .trash:hover {
   background-color: #ef986c;
   color: black;
+  border: none;
 }
 
 /* UI AREAS */
@@ -326,6 +342,7 @@ input[type=text] {
   z-index: -1;
 }
 
+/* PRINT STYLES */
 
 @media print {
   .noprint {

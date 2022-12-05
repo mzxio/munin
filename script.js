@@ -82,16 +82,31 @@ document.getElementById("editText").addEventListener("input", (event) => {
 
 // UI FUNCTIONS
 
+// read the menu form state to create a settings object
+function menuSettings() {
+  let controls = document.getElementById("viewMenu").elements;
+  let settings = {
+    "new": controls.new.checked,
+    "meta": controls.meta.checked,
+    "tools": controls.tools.checked,
+    "share": controls.share.checked,
+    "show": controls.show.options[controls.show.options.selectedIndex].innerText,
+    "sort": controls.sort.options[controls.sort.options.selectedIndex].innerText,
+    "view": controls.view.options[controls.view.options.selectedIndex].innerText
+  };
+  return settings;
+}
+
 // hotdog menu
 function menuToggle() {  
   let controls = document.getElementById("viewMenu").elements;
   let viewMenu = document.getElementById("viewMenu");
   let viewMenuState = viewMenu.style.display;
   //console.log(viewMenuState)
-  
+
   if (viewMenuState === "none") {
     document.getElementById("viewMenu").style.display = "block";
-    document.getElementById("viewMenuToggle").innerHTML = "X";
+    document.getElementById("viewMenuToggle").innerHTML = "&check;";
   }
   if (viewMenuState === "block") {
     document.getElementById("viewMenu").style.display = "none";
@@ -105,7 +120,8 @@ function menuToggle() {
   }
   
   //console.log(viewMenuState)
-  showAllCards()
+  showAllCards();
+  //document.activeElement.blur();
 }
 
 // "X" button in composer
