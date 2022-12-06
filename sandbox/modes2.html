@@ -3,17 +3,465 @@
 <head>
 <style>
 
+
+/* NEW COLORS  */
+
+/*
+aquamarine       #7fffd4 
+dark turquoise   #57a7a3
+almost white     #eefdf9
+mid purp         #8c849b
+dark purp        #453f51
+darker purp      #231f29
+teracotta style  #ef986c
+deep red         #cc5140
+*/
+
+
 body {
+  margin: 0;
+  font-family: "OpenSans", sans-serif;
+  font-weight: normal;
+  font-size: 12pt;
+  line-height: 14pt;
+  background-color: #000;
+  color: #eefdf9;
+}
+
+
+/**/
+
+button,
+textarea,
+input,
+select,
+option,
+label {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: inline-block;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  resize: none;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font-family: "OpenSans", sans-serif;
+  font-weight: normal;
+  font-size: 12pt;
+  line-height: 14pt;
+  background: transparent;
+  color: inherit;
+}
+
+
+/* BUTTONS */
+
+button {
+  font-weight: bold;
+  color: #57a7a3;
+  border: 2pt solid #57a7a3;
+  padding: 0 4pt;
+  border-radius: 12pt;
+}
+
+button:disabled,
+button:disabled:hover,
+button:disabled:active {
+  color: #231f29;
+  background-color: black;
+  border-color: #231f29;
+}
+
+button:hover {
+  color: #7fffd4;
+  border-color: #7fffd4;
+}
+
+button:focus {}
+
+button:active {
+  background-color: #7fffd4;
+  color: black;
+}
+
+button.trash {
+  color: #cc5140;
+  border-color: #cc5140;
+}
+
+button.trash:hover {
+  color: #ef986c;
+  border-color: #ef986c;
+}
+
+button.trash:active {
+  background-color: #ef986c;
+  color: black;
+}
+
+/* TEXT  */
+
+textarea {
+  height: 1.5in;
+}
+
+textarea,
+input[type=text] {
+  width: 100%;
+  padding: 0;
+  border-bottom: 2pt solid #231f29;
+}
+
+textarea:focus,
+input[type=text]:focus {
+  border-color: #7fffd4;
+}
+
+textarea:focus::placeholder,
+input:focus::placeholder {
+  color: #8c849b;
+}
+
+
+
+textarea::placeholder,
+input::placeholder {
+  color: #453f51;
+}
+
+/* CHECKBOX */
+
+input[type=checkbox] {
+  height: 12pt;
+  width: 12pt;
+  border-radius: 6pt;
+  padding: 4pt;
+  border: 2pt solid #57a7a3;
+}
+
+input[type=checkbox]:checked {
+  background-color: #7fffd4;
+}
+
+input[type=checkbox]:hover {
+  border-color: #7fffd4;
+}
+
+
+/* SELECT  */
+
+select {
+  min-width: 0.25in;
+  cursor: pointer;
+  color: #7fffd4;
+  border-bottom: 2pt solid #57a7a3;
+
+}
+
+select:hover {
+  border-color: #7fffd4;
+}
+
+option::slection {
+  background-color: red;
+}
+
+option:checked {
   background-color: black;
 }
+
+option:not(:checked) {
+  background-color: black;
+  color: #57a7a3;
+}
+
+label {
+  min-width: 0.5in;
+  padding: 0 4pt;
+  color: #8c849b;
+}
+
+form {
+  
+}
+
+  
+.field {
+  max-width: 4in;
+  box-sizing: border-box;
+  margin: 40pt auto;
+  padding: 0;
+  background-color: #000;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 8pt;
+  margin: 8pt 0;
+}
+
+.menu.top {
+  justify-content: space-between;
+}
+
+.group {
+  margin: 8pt 0;
+  display: flex;
+  gap: 4pt;
+}
+
+.counter {
+  font-size: 11pt;
+  line-height: 18pt;
+  font-weight: bold;
+  color: #453f51;
+}
+
+.counter.active {
+  color: #8c849b;
+}
+
+.counter.warn {
+  color: #cc5140;
+}
+
+
+.card {
+  padding: 0;
+  border-bottom: 2pt solid #231f29;
+}
+
+.card p {
+  margin: 0;
+}
+
+.card button {
+  border: none;
+  padding: 0 4pt ;
+  font-size: 11pt;
+}
+
+.card .title {
+  font-size: 14pt;
+  font-weight: bold;
+  margin: 8pt 0;
+}
+
+.card .text {
+  margin: 8pt 0;
+}
+
+.card .timestamp {
+  font-size: 11pt;
+  font-weight: normal;
+  color: #453f51;
+}
+
+.card .pip {
+  font-size: 11pt;
+  font-weight: bold;
+  color: #8c849b;
+}
+
+.card .id,
+.card .related {
+    font-size: 11pt;
+    font-weight: bold;
+    color: #453f51;
+}
+
+input.pip {
+  font-weight: bold;
+  width: 50pt;
+}
+
+input.title {
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+
 
 </style>
 </head>
 
 <body>
 
+  <!-- MAIN MENU -->
+  <div id="uiTopMenu" class="field">
+    <div class="menu top">
+        <button>&equiv;</button>
+        <button>New</button>
+      </div>
+  </div>
 
 
+
+  <!-- DECK MENU -->
+  <div id="uiDeckMenu" class="field">
+    <div class="menu">
+      <button id="">X</button>
+      <button id="" disabled>&check;</button>
+    </div>
+    <input type="text" id="" autocomplete="off" placeholder="deck name"/>
+    <input type="text" id="" autocomplete="off" placeholder="author"/>
+    <div class="menu">
+      <button>export</button>
+      <button>import</button>
+      <button class="trash">reset</button>
+    </div>    
+  </div>
+
+  <!-- COMPOSER -->
+  <div id="uiCompose" class="field">
+    <div class="menu top">
+      <button id="">X</button>
+      <button id="">send it</button>
+    </div>
+    <div class="group">
+      <input type="text" id="" class="title" autocomplete="off" maxlength="80" placeholder="title"/>
+    </div>
+    <textarea id="" maxlength="450" placeholder="write something"></textarea>
+    <div class="menu">
+      <span id="" class="counter">450</span>
+      <span id="" class="counter active">449</span>
+      <span id="" class="counter warn">0</span>
+    </div>
+    <div class="group">
+      <input type="text" id="" class="pip" autocomplete="off" maxlength="4" placeholder="pip"/>
+      <input id="" type="text" autocomplete="off" maxlength="450" placeholder="related"/>
+    </div>
+    <div class="group">
+      <input type="text" id="" autocomplete="off" placeholder="prev"/>
+      <input type="text" id="" autocomplete="off" placeholder="next"/>
+      <button disabled>add</button>
+    </div>
+  </div>
+
+  <!-- EDITOR -->
+  <div id="uiEdit" class="field">
+    <div class="menu top">
+      <button id="">X</button>
+      <button id="" disabled>&check;</button>
+    </div>
+    <div class="group">
+      <input type="text" id="" class="title" autocomplete="off" maxlength="80" placeholder="title"/>
+    </div>
+    <textarea id="" maxlength="450" placeholder="write something"></textarea>
+    <div class="menu">
+      <span id="" class="counter">450</span>
+      <span id="" class="counter active">449</span>
+      <span id="" class="counter warn">0</span>
+    </div>
+    <div class="group">
+      <input type="text" id="" class="pip" autocomplete="off" maxlength="4" placeholder="pip"/>
+      <input id="" type="text" autocomplete="off" maxlength="450" placeholder="related"/>
+    </div>
+    <div class="group">
+      <input type="text" id="" autocomplete="off" placeholder="prev"/>
+      <input type="text" id="" autocomplete="off" placeholder="next"/>
+      <button disabled>add</button>
+    </div>
+  </div>
+
+
+  <div id="uiShare" class="field"></div>
+  
+  <div id="uiDecks" class="field"></div>
+
+
+  <!-- VIEW MENU  -->
+  <div id="uiViewMenu" class="field">
+    <div class="menu">
+      <button id="">X</button>
+      <button id="" disabled>&check;</button>
+    </div>
+    <form class="menu">
+      <!-- -->
+      <div>
+        <div class="group">
+          <input type="checkbox" id="ids" />
+          <label for="ids">IDs</label>
+        </div>
+        <div class="group">
+          <input type="checkbox" id="meta" checked />
+          <label for="meta">Meta</label>
+        </div>
+        <div class="group">
+          <input type="checkbox" id="tools" checked />
+          <label for="tools">Tools</label>
+        </div>
+      </div>
+      <!-- -->
+      <div>
+        <div class="group">
+          <label for="view">View</label>
+          <select id="view">
+            <option>Trash</option>
+            <option selected>Timeline</option>
+            <option>Cards</option>
+            <option>Relations</option>
+          </select>
+        </div>
+        <div class="group">
+          <label for="show">Limit</label>
+          <select id="show">
+            <option selected>All</option>
+            <option>54</option>
+            <option>26</option>
+            <option>13</option>
+          </select>
+        </div>
+        <div class="group">
+          <label for="sort">Sort</label>
+          <select id="sort">
+            <option selected>New to Old</option>
+            <option>Old to New</option>
+            <option>Pip A-Z</option>
+            <option>Pip Z-A</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div id="uiCards" class="field">
+
+    <!-- card template -->
+    <div class="card">
+      <p class="id">id</p>
+      <p class="pip">pip</p>
+      <p class="title">title</p>
+      <p class="text">text</p>
+      <p class="related">related</p>
+      <p class="timestamp">timestamp</p>
+      <div class="menu top">
+        <button class="trash">trash</button>
+        <button>share</button>
+        <button>edit</button>
+        <button>add</button>
+      </div>
+      <!--
+      <div class="menu top">
+        <button class="trash">delete forever</button>
+        <button>restore</button>
+      </div>
+      -->
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+  
 <script>
 
 </script>
